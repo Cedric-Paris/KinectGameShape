@@ -1,0 +1,12 @@
+﻿<Window x:Class="LapinCretinsFormes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="480" Width="640">
+    <Viewbox>
+        <Canvas Width="640" Height="480">
+            <Image Name="backgroundImage" OpacityMask="Black" Source="Images/back.jpg" Width="640" Height="480"/>
+            <Image Name="KinectImage" OpacityMask="White"/>
+            <!--<Path Stroke="Black" Data="M 100,100 L 5,5 Q 300,30 200,200 Z" StrokeThickness="5"/>-->
+        </Canvas>
+    </Viewbox>
+</Window>
