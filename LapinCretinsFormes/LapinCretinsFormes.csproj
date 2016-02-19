@@ -34,8 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -93,8 +95,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Resource Include="Images\LinePath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsPotrace\CsPotrace.csproj">
+      <Project>{c77d224b-f7c8-4627-bca9-7eb32b18861c}</Project>
+      <Name>CsPotrace</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KinectToolkit\KinectToolkit.csproj">
       <Project>{0aa4ba99-8875-4b8a-b1b3-df0b9fee5987}</Project>
       <Name>KinectToolkit</Name>

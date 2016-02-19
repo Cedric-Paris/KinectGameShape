@@ -13,7 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KinectToolkit;
+using CsPotrace;
 using System.Diagnostics;
+using System.Threading;
+using System.Drawing;
 
 namespace LapinCretinsFormes
 {
@@ -23,6 +26,7 @@ namespace LapinCretinsFormes
     public partial class MainWindow : Window
     {
         private KinectOutputToImage kinectOutput;
+        private bool isTreatingPath = false;
 
         public MainWindow()
         {
@@ -34,6 +38,31 @@ namespace LapinCretinsFormes
         public void OnImageReady(object sender, BitmapSource sourceImage)
         {
             KinectImage.Source = sourceImage;
+            Bitmap b = SourceToBitmapConverter.ConvertToBitmap(sourceImage);
+            RefreshScore(b);
+        }
+
+
+        private void RefreshScore(Bitmap sourceImage)
+        {
+            if (isTreatingPath)
+                return;
+            isTreatingPath = true;
+            Thread t = new Thread( () => CalculScore(sourceImage));
+            t.Start();
+        }
+
+
+        private void CalculScore(Bitmap s)
+        {
+            BitmapToXamlPath g = new BitmapToXamlPath();
+            string r = g.ConvertBitmap(s);
+            try
+            {
+                Application.Current.Dispatcher.Invoke(() => { shadePath.Data = Geometry.Parse(r); });
+            }
+            catch (Exception e) { }
+            isTreatingPath = false;
         }
     }
 }

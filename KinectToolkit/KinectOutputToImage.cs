@@ -41,7 +41,7 @@ namespace KinectToolkit
 
         private WriteableBitmap colorBitmap;
 
-        private KinectSensor kinectSensor;
+        public KinectSensor kinectSensor;
 
         public KinectOutputToImage()
         {
@@ -100,7 +100,7 @@ namespace KinectToolkit
                                                 
                         //colorPixelIndex++; si on a pas de transparence (bgr32)
                         if(intensity == 0)
-                            this.colorPixels[colorPixelIndex++] = 200;
+                            this.colorPixels[colorPixelIndex++] = 255;
                         else
                             this.colorPixels[colorPixelIndex++] = 0;
                     }
