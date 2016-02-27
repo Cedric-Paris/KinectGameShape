@@ -53,13 +53,17 @@ namespace LapinCretinsFormes
         }
 
 
+        private ScoreManager scoreManager = new ScoreManager();
         private void CalculScore(Bitmap s)
         {
             BitmapToXamlPath g = new BitmapToXamlPath();
             string r = g.ConvertBitmap(s);
             try
             {
-                Application.Current.Dispatcher.Invoke(() => { shadePath.Data = Geometry.Parse(r); });
+                Application.Current.Dispatcher.Invoke(() => 
+                {
+                    textScore.Text = scoreManager.ScoreFromGeometries(shadePath.Data, Geometry.Parse(r)).ToString();
+                });
             }
             catch (Exception e) { }
             isTreatingPath = false;
