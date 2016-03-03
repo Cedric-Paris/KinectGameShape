@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace LapinCretinsFormes
 {
     /// <summary>
-    /// Logique d'interaction pour InstructionsUserControl.xaml
+    /// Logique d'interaction pour CreditsUserControl.xaml
     /// </summary>
-    public partial class InstructionsUserControl : UserControl
+    public partial class CreditsUserControl : UserControl
     {
         private MainWindow windowContainer;
 
-        public InstructionsUserControl(MainWindow container)
+        public CreditsUserControl(MainWindow container)
         {
             InitializeComponent();
             windowContainer = container;
@@ -31,12 +31,6 @@ namespace LapinCretinsFormes
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
             windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
-        }
-
-        private void GameButtonClick(object sender, RoutedEventArgs e)
-        {
-            //windowContainer.LoadContent(new GameUserControl(windowContainer)); POUR LES TESTS SANS KINECT
-            windowContainer.LoadContent(new ScoreUserControl(windowContainer));
         }
     }
 }

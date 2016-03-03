@@ -37,5 +37,10 @@ namespace LapinCretinsFormes
         {
             windowContainer.LoadContent(new InstructionsUserControl(windowContainer));
         }
+
+        private void CreditsButtonClick(object sender, RoutedEventArgs e)
+        {
+            windowContainer.LoadContent(new CreditsUserControl(windowContainer));
+        }
     }
 }

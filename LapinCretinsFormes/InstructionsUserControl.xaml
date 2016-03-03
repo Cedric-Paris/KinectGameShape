@@ -5,44 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="1680">
-    <UserControl.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Futura-CondensedLight"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-        </Style>
-    </UserControl.Resources>
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <Label Content="Instructions" Height="80" Margin="20"
-            FontFamily="Futura-CondensedMedium"
-            FontSize="62" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Row="1" Margin="20" Text="
+        <Label Content="Instructions" Margin="0,20,0,0"/>
+        <TextBlock Grid.Row="1" Style="{StaticResource MainText}" 
+                   FontSize="32"  Text="
             Cachez vous dans le temps imparti pour échapper à la folle qui vous suit ! 
             "/>
         <Image Grid.Row="2" Source="Images/Cerisier.png"/>
-        <TextBlock Grid.Row="3">
+        <TextBlock Grid.Row="3" Style="{StaticResource MainText}" 
+                   FontSize="32" >
             <Run Text="Remplissez la forme en rose pour qu'elle ne vous repère pas dans les ombres"/>
             <LineBreak/>
             <Run Text="et dépassez le moins possible pour ne pas vous faire repérer !"/>
         </TextBlock>
-        <Button Content="Retour" Margin="40" Height="60"
-               FontFamily="Futura-CondensedMedium"
-               FontSize="40" Width="200"
+        <Button Content="Retour"
                HorizontalAlignment="Left"
                Click="ReturnButtonClick"
                Grid.Row="3"/>
-        <Button Content="Jouer !" Margin="40" Height="60"
-               FontFamily="Futura-CondensedMedium"
-               FontSize="40" Width="200"
+        <Button Content="Jouer !"
                HorizontalAlignment="Right"
                Click="GameButtonClick"
                Grid.Row="3"/>

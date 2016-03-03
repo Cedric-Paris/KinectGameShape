@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreditsUserControl.xaml.cs">
+      <DependentUpon>CreditsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmailInputUserControl.xaml.cs">
+      <DependentUpon>EmailInputUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameUserControl.xaml.cs">
       <DependentUpon>GameUserControl.xaml</DependentUpon>
     </Compile>
@@ -72,6 +78,14 @@
       <DependentUpon>ScoreUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shape.cs" />
+    <Page Include="CreditsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmailInputUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +137,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\futura-condensedlight.ttf" />
+    <Resource Include="Fonts\Futura-CondensedMedium.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

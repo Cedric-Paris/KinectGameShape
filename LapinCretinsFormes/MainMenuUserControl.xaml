@@ -9,14 +9,14 @@
         <ImageBrush ImageSource="Images/Cerisier.png" Stretch="UniformToFill"/>
     </UserControl.Background>
     <UserControl.Resources>
-        <Style TargetType="{x:Type Button}">
+        <Style x:Key="MainMenuButton" TargetType="Button">
             <Setter Property="Height" Value="80"/>
             <Setter Property="Background">
                 <Setter.Value>
                     <SolidColorBrush Color="WhiteSmoke" Opacity="0.5"/>
                 </Setter.Value>
             </Setter>
-            <Setter Property="FontFamily" Value="Futura-CondensedMedium"/>
+            <Setter Property="FontFamily" Value="./Fonts/#Futura-CondensedMedium"/>
             <Setter Property="FontSize" Value="42"/>
         </Style>
     </UserControl.Resources>
@@ -33,12 +33,16 @@
         <Image Source="Images/Logo.png" Height="Auto" 
                 Margin="120" Grid.ColumnSpan="2"/>
         <Button Grid.Row="1" Content="Nouvelle Partie" 
-                Width="350" Click="NewGameButtonClick"/>
+                Width="350" Click="NewGameButtonClick"
+                Style="{StaticResource MainMenuButton}"/>
         <Button Grid.Row="2" Content="Crédits"
-                Width="350"/>
+                Width="350" Click="CreditsButtonClick"
+                Style="{StaticResource MainMenuButton}"/>
         <Button Grid.Row="1" Grid.Column="1" Content="Highscores"
-                Width="350"/>
+                Width="350"
+                Style="{StaticResource MainMenuButton}"/>
         <Button Grid.Row="2" Grid.Column="1" Content="Quitter"
-                Width="350" Click="CloseButtonClick"/>
+                Width="350" Click="CloseButtonClick"
+                Style="{StaticResource MainMenuButton}"/>
     </Grid>
 </UserControl>

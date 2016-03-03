@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="LapinCretinsFormes.CreditsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="1050" d:DesignWidth="1680">
+    <UserControl.Background>
+        <ImageBrush x:Name="PictureTakenBackgroundImage" 
+                    Stretch="UniformToFill"/>
+    </UserControl.Background>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource MainText}"
+                   Margin="20,0,20,0" FontSize="50"
+                   Text="Développé par Cédric Paris et Nawhal Sayarh."/>
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="1"
+                   Margin="20,0,20,0" FontSize="50"
+                   Text="Toute image, vidéo, musique est propriété de YandereDev, développeur du jeu Yandere Simulator dont nous avons repris l'univers."/>
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="2"
+                   Margin="20,0,20,0" FontSize="50"
+                   Text="Réalisé dans le cadre d'un projet de Réalité Virtuelle à l'IUT Informatique de Clermont-Ferrand, Université d'Auvergne."/>
+        <Button Content="Menu" Grid.Row="3" Click="ReturnButtonClick"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"/>
+    </Grid>
+</UserControl>

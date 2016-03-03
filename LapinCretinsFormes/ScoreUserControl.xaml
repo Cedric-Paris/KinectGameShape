@@ -5,28 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="1680">
-    <UserControl.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Futura-CondensedLight"/>
-            <Setter Property="FontSize" Value="50"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-        </Style>
-    </UserControl.Resources>
     <UserControl.Background>
         <ImageBrush x:Name="PictureTakenBackgroundImage" 
                     Stretch="UniformToFill"/>
     </UserControl.Background>
-    <TextBlock Grid.Row="3" Margin="40" Padding="10">
+    <DockPanel Margin="20">
+        <Button Content="Suite" DockPanel.Dock="Bottom"
+                HorizontalAlignment="Right"
+                Click="NextButtonClick"/>
+        <TextBlock Margin="40" Padding="10"
+                   FontSize="50" Style="{StaticResource MainText}">
             <Run Text="Bravo, vous avez rempli la forme à "/>
             <Run Name="ScorePourcentageText"/>
             <Run Text="% pour un score de "/>
             <Run Name="ScoreText"/>
             <Run Text=" !"/>
-        <TextBlock.Background>
-            <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
-        </TextBlock.Background>
-    </TextBlock>
+            <TextBlock.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+            </TextBlock.Background>
+        </TextBlock>
+    </DockPanel>
 </UserControl>

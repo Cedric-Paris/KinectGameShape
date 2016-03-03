@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,11 @@ namespace LapinCretinsFormes
         {
             InitializeComponent();
             windowContainer = container;
+        }
+
+        public void NextButtonClick(object sender, RoutedEventArgs e)
+        {
+            windowContainer.LoadContent(new EmailInputUserControl(windowContainer));
         }
     }
 }
