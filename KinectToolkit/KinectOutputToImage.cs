@@ -41,7 +41,7 @@ namespace KinectToolkit
 
         private WriteableBitmap colorBitmap;
 
-        public KinectSensor kinectSensor;
+        public KinectSensor kinectSensor {get; private set;}
 
         public KinectOutputToImage()
         {

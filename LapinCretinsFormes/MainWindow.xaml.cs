@@ -26,7 +26,7 @@ namespace LapinCretinsFormes
     public partial class MainWindow : Window
     {
 
-        private UserControl View;
+        private UserControl view;
 
         public MainWindow()
         {
@@ -36,7 +36,7 @@ namespace LapinCretinsFormes
 
         public void LoadContent(UserControl content)
         {
-            View = content;
+            view = content;
             ContentOnWindow.Content = content;
         }
     }
