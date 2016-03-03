@@ -1,0 +1,53 @@
+﻿<Window x:Class="LapinCretinsFormes.Instructions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LapinCretinsFormes"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Title="Instructions" Height="1050" Width="1680">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Futura-CondensedLight"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Instructions" Height="80" Margin="20"
+            FontFamily="Futura-CondensedMedium"
+            FontSize="62" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Margin="20" Text="
+            Cachez vous dans le temps imparti pour échapper à la folle qui vous suit ! 
+            "/>
+        <Image Grid.Row="2" Source="Cerisier.png"/>
+        <TextBlock Grid.Row="3">
+            <Run Text="Remplissez la forme en rose pour qu'elle ne vous repère pas dans les ombres"/>
+            <LineBreak/>
+            <Run Text="et dépassez le moins possible pour ne pas vous faire repérer !"/>
+        </TextBlock>
+        <Button Content="Retour" Margin="40" Height="60"
+               FontFamily="Futura-CondensedMedium"
+               FontSize="40" Width="200"
+               HorizontalAlignment="Left"
+               Click="ReturnButtonClick"
+               Grid.Row="3"/>
+        <Button Content="Jouer !" Margin="40" Height="60"
+               FontFamily="Futura-CondensedMedium"
+               FontSize="40" Width="200"
+               HorizontalAlignment="Right"
+               Click="ReturnButtonClick"
+               Grid.Row="3"/>
+    </Grid>
+</Window>

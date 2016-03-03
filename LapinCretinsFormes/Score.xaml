@@ -1,0 +1,35 @@
+﻿<Window x:Class="LapinCretinsFormes.Score"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LapinCretinsFormes"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Title="Score" Height="1050" Width="1680">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Futura-CondensedLight"/>
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush x:Name="PictureTakenBackgroudnImage" 
+                    Stretch="UniformToFill"/>
+    </Window.Background>
+    <TextBlock Grid.Row="3" Margin="40" Padding="10">
+            <Run Text="Bravo, vous avez rempli la forme à "/>
+            <Run Name="ScorePourcentageText"/>
+            <Run Text="% pour un score de "/>
+            <Run Name="ScoreText"/>
+            <Run Text=" !"/>
+        <TextBlock.Background>
+            <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+        </TextBlock.Background>
+    </TextBlock>
+</Window>
