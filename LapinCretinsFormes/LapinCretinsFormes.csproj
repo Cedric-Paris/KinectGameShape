@@ -55,18 +55,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Instructions.xaml.cs">
-      <DependentUpon>Instructions.xaml</DependentUpon>
+    <Compile Include="GameUserControl.xaml.cs">
+      <DependentUpon>GameUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuPrincipal.xaml.cs">
-      <DependentUpon>MenuPrincipal.xaml</DependentUpon>
+    <Compile Include="GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Score.xaml.cs">
-      <DependentUpon>Score.xaml</DependentUpon>
+    <Compile Include="InstructionsUserControl.xaml.cs">
+      <DependentUpon>InstructionsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenuUserControl.xaml.cs">
+      <DependentUpon>MainMenuUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScoreManager.cs" />
+    <Compile Include="ScoreUserControl.xaml.cs">
+      <DependentUpon>ScoreUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shape.cs" />
-    <Page Include="Instructions.xaml">
+    <Page Include="GameUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InstructionsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainMenuUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,11 +100,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MenuPrincipal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Score.xaml">
+    <Page Include="ScoreUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,9 +133,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\LinePath.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CsPotrace\CsPotrace.csproj">
       <Project>{c77d224b-f7c8-4627-bca9-7eb32b18861c}</Project>
       <Name>CsPotrace</Name>
@@ -135,10 +146,10 @@
     <Resource Include="Images\back.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Cerisier.png" />
+    <Resource Include="Images\Cerisier.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Logo.png" />
+    <Resource Include="Images\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

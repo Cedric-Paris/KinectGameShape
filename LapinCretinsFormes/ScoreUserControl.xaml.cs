@@ -10,18 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
     /// <summary>
-    /// Interaction logic for Score.xaml
+    /// Logique d'interaction pour ScoreUserControl.xaml
     /// </summary>
-    public partial class Score : Window
+    public partial class ScoreUserControl : UserControl
     {
-        public Score()
+        private MainWindow windowContainer;
+
+        public ScoreUserControl(MainWindow container)
         {
             InitializeComponent();
+            windowContainer = container;
         }
     }
 }

@@ -20,53 +20,24 @@ using System.Drawing;
 
 namespace LapinCretinsFormes
 {
-    /// <summary>
+    /// <summary>s
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private KinectOutputToImage kinectOutput;
-        private bool isTreatingPath = false;
+
+        private UserControl View;
 
         public MainWindow()
         {
             InitializeComponent();
-            kinectOutput = new KinectOutputToImage();
-            kinectOutput.ImageReady += OnImageReady;
+            LoadContent(new MainMenuUserControl(this));
         }
 
-        public void OnImageReady(object sender, BitmapSource sourceImage)
+        public void LoadContent(UserControl content)
         {
-            KinectImage.Source = sourceImage;
-            Bitmap b = SourceToBitmapConverter.ConvertToBitmap(sourceImage);
-            RefreshScore(b);
-        }
-
-
-        private void RefreshScore(Bitmap sourceImage)
-        {
-            if (isTreatingPath)
-                return;
-            isTreatingPath = true;
-            Thread t = new Thread( () => CalculScore(sourceImage));
-            t.Start();
-        }
-
-
-        private ScoreManager scoreManager = new ScoreManager();
-        private void CalculScore(Bitmap s)
-        {
-            BitmapToXamlPath g = new BitmapToXamlPath();
-            string r = g.ConvertBitmap(s);
-            try
-            {
-                Application.Current.Dispatcher.Invoke(() => 
-                {
-                    textScore.Text = scoreManager.ScoreFromGeometries(shadePath.Data, Geometry.Parse(r)).ToString();
-                });
-            }
-            catch (Exception e) { }
-            isTreatingPath = false;
+            View = content;
+            ContentOnWindow.Content = content;
         }
     }
 }

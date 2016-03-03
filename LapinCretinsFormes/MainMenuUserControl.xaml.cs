@@ -10,30 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
     /// <summary>
-    /// Interaction logic for MenuPrincipal.xaml
+    /// Logique d'interaction pour MainMenuUserControl.xaml
     /// </summary>
-    public partial class MenuPrincipal : Window
+    public partial class MainMenuUserControl : UserControl
     {
-        public MenuPrincipal()
+        private MainWindow windowContainer;
+
+        public MainMenuUserControl(MainWindow container)
         {
             InitializeComponent();
+            windowContainer = container;
         }
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            windowContainer.Close();
         }
 
         private void NewGameButtonClick(object sender, RoutedEventArgs e)
         {
-            Instructions i = new Instructions();
-            i.Show();
-            Close();
+            windowContainer.LoadContent(new InstructionsUserControl(windowContainer));
         }
     }
 }

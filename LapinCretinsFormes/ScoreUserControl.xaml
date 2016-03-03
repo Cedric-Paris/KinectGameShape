@@ -1,14 +1,11 @@
-﻿<Window x:Class="LapinCretinsFormes.Score"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LapinCretinsFormes"
-        mc:Ignorable="d"
-        WindowState="Maximized"
-        WindowStyle="None"
-        Title="Score" Height="1050" Width="1680">
-    <Window.Resources>
+﻿<UserControl x:Class="LapinCretinsFormes.ScoreUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="1050" d:DesignWidth="1680">
+    <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -17,11 +14,11 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
-    </Window.Resources>
-    <Window.Background>
-        <ImageBrush x:Name="PictureTakenBackgroudnImage" 
+    </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush x:Name="PictureTakenBackgroundImage" 
                     Stretch="UniformToFill"/>
-    </Window.Background>
+    </UserControl.Background>
     <TextBlock Grid.Row="3" Margin="40" Padding="10">
             <Run Text="Bravo, vous avez rempli la forme à "/>
             <Run Name="ScorePourcentageText"/>
@@ -32,4 +29,4 @@
             <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
         </TextBlock.Background>
     </TextBlock>
-</Window>
+</UserControl>

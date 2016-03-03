@@ -1,14 +1,11 @@
-﻿<Window x:Class="LapinCretinsFormes.Instructions"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LapinCretinsFormes"
-        mc:Ignorable="d"
-        WindowState="Maximized"
-        WindowStyle="None"
-        Title="Instructions" Height="1050" Width="1680">
-    <Window.Resources>
+﻿<UserControl x:Class="LapinCretinsFormes.InstructionsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="1050" d:DesignWidth="1680">
+    <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -17,7 +14,7 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,7 +28,7 @@
         <TextBlock Grid.Row="1" Margin="20" Text="
             Cachez vous dans le temps imparti pour échapper à la folle qui vous suit ! 
             "/>
-        <Image Grid.Row="2" Source="Cerisier.png"/>
+        <Image Grid.Row="2" Source="Images/Cerisier.png"/>
         <TextBlock Grid.Row="3">
             <Run Text="Remplissez la forme en rose pour qu'elle ne vous repère pas dans les ombres"/>
             <LineBreak/>
@@ -47,7 +44,7 @@
                FontFamily="Futura-CondensedMedium"
                FontSize="40" Width="200"
                HorizontalAlignment="Right"
-               Click="ReturnButtonClick"
+               Click="GameButtonClick"
                Grid.Row="3"/>
     </Grid>
-</Window>
+</UserControl>
