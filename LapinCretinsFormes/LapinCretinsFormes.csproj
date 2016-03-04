@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -64,9 +65,6 @@
     <Compile Include="GameUserControl.xaml.cs">
       <DependentUpon>GameUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameWindow.xaml.cs">
-      <DependentUpon>GameWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="InstructionsUserControl.xaml.cs">
       <DependentUpon>InstructionsUserControl.xaml</DependentUpon>
     </Compile>
@@ -78,6 +76,7 @@
       <DependentUpon>ScoreUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shape.cs" />
+    <Compile Include="ShapeDataBase.cs" />
     <Page Include="CreditsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,10 +86,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

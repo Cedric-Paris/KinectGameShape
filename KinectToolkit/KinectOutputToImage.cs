@@ -158,6 +158,15 @@ namespace KinectToolkit
             return true;
         }
 
+        public void RemoveSubscriptions()
+        {
+            ImageReady = null;
+            if (!isCalibrate)
+                kinectSensor.DepthFrameReady -= this.CalibrateFrameByFrame;
+            else
+                kinectSensor.DepthFrameReady -= this.SensorDepthFrameReady;
+        }
+
 
     }
 }

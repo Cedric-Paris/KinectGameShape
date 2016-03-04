@@ -23,10 +23,12 @@ namespace LapinCretinsFormes
     {
         private MainWindow windowContainer;
 
-        public ScoreUserControl(MainWindow container)
+        public ScoreUserControl(MainWindow container, BitmapSource picture, string score, string pourcentage)
         {
             InitializeComponent();
             windowContainer = container;
+            PictureTakenBackgroundImage.ImageSource = picture;
+            ScoreText.Text = score;
         }
 
         public void NextButtonClick(object sender, RoutedEventArgs e)

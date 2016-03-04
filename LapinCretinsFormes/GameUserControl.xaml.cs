@@ -31,6 +31,7 @@ namespace LapinCretinsFormes
         private const int TIME_TO_PLAY = 20;
         private int currentTime = 0;
         private bool gameHasStart = false;
+        private System.Windows.Threading.DispatcherTimer gameTimer;
 
         private WriteableBitmap colorBitmap;
 
@@ -40,11 +41,26 @@ namespace LapinCretinsFormes
         public GameUserControl(MainWindow container)
         {
             InitializeComponent();
+            LoadShape(ShapeDataBase.GetRandomShape());
+            textTime.Text = TIME_TO_PLAY.ToString();
             currentTime = TIME_TO_PLAY;
             windowContainer = container;
-            /*kinectOutput = new KinectOutputToImage();
+            kinectOutput = new KinectOutputToImage();
             kinectOutput.ImageReady += OnImageReady;
-            kinectOutput.ImageReady += OnGameStart;*/
+            kinectOutput.ImageReady += OnGameStart;
+
+            kinectOutput.kinectSensor.ColorStream.Enable(ColorImageFormat.RgbResolution1280x960Fps12);
+            this.colorBitmap = new WriteableBitmap(kinectOutput.kinectSensor.ColorStream.FrameWidth, kinectOutput.kinectSensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
+        }
+
+        private void LoadShape(Shape shape)
+        {
+            shadePath.Data = shape.getShapeGeometry();
+            BitmapImage backImg = new BitmapImage();
+            backImg.BeginInit();
+            backImg.UriSource = shape.getImageUri();
+            backImg.EndInit();
+            backgroundImage.Source = backImg;
         }
 
         public void OnImageReady(object sender, BitmapSource sourceImage)
@@ -66,6 +82,7 @@ namespace LapinCretinsFormes
 
 
         private ScoreManager scoreManager = new ScoreManager();
+
         private void CalculScore(Bitmap s)
         {
             BitmapToXamlPath g = new BitmapToXamlPath();
@@ -87,14 +104,14 @@ namespace LapinCretinsFormes
             if (!gameHasStart)
             {
                 gameHasStart = true;
-                System.Timers.Timer t = new System.Timers.Timer(1000);
-                t.Elapsed += UpdateTime;
-                t.Start();
+                gameTimer = new System.Windows.Threading.DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+                gameTimer.Tick += UpdateTime;
+                gameTimer.Start();
                 kinectOutput.ImageReady -= OnGameStart;
             }
         }
 
-        private void UpdateTime(object source, System.Timers.ElapsedEventArgs g)
+        private void UpdateTime(object sender, EventArgs e)
         {
             currentTime -= 1;
             Debug.WriteLine(currentTime);
@@ -104,40 +121,43 @@ namespace LapinCretinsFormes
             });
             if (currentTime <= 0)
             {
+                gameTimer.Stop();
                 OnGameEnd();
                 return;
             }
             if (currentTime <= 1)
-            {
-                kinectOutput.kinectSensor.ColorStream.Enable(ColorImageFormat.RgbResolution1280x960Fps12);
-                this.colorBitmap = new WriteableBitmap(kinectOutput.kinectSensor.ColorStream.FrameWidth, kinectOutput.kinectSensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
                 kinectOutput.kinectSensor.ColorFrameReady += OnPhotoReady;
-            }
         }
 
-        
         public void OnPhotoReady(object sender, ColorImageFrameReadyEventArgs args)
         {
-            if (this.colorBitmap == null)
-                return;
             ColorImageFrame frame = args.OpenColorImageFrame();
-            byte[] colorPixels = new byte[kinectOutput.kinectSensor.ColorStream.FramePixelDataLength * sizeof(int)];
+            if (frame == null) return;
+            byte[] colorPixels = new byte[kinectOutput.kinectSensor.ColorStream.FramePixelDataLength];
             frame.CopyPixelDataTo(colorPixels);
             frame.Dispose();
+            
+            Application.Current.Dispatcher.Invoke(() =>
+            {
             this.colorBitmap.WritePixels(
                         new Int32Rect(0, 0, this.colorBitmap.PixelWidth, this.colorBitmap.PixelHeight),
                         colorPixels,
                         this.colorBitmap.PixelWidth * sizeof(int),
                         0);
+            });
         }
 
         private void OnGameEnd()
         {
-            kinectOutput.kinectSensor.Dispose();
-            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
-            img.Source = this.colorBitmap;
-
-            //windowContainer.LoadContent(new ScoreUserControl(windowContainer, img, textScore.Text, "A SPECIFIER"));
+            Debug.WriteLine("End Of Game");
+            kinectOutput.kinectSensor.ColorStream.Disable();
+            kinectOutput.kinectSensor.DepthStream.Disable();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                windowContainer.LoadContent(new ScoreUserControl(windowContainer, this.colorBitmap, textScore.Text, "NON UTILISE ACTUELLEMENT"));
+            });
+            kinectOutput.kinectSensor.ColorFrameReady -= OnPhotoReady;
+            kinectOutput.RemoveSubscriptions();
 
             ///Pour sauvegarder l'image
             /*RenderTargetBitmap bitmap = new RenderTargetBitmap(

@@ -36,7 +36,7 @@ namespace LapinCretinsFormes
         private void GameButtonClick(object sender, RoutedEventArgs e)
         {
             //windowContainer.LoadContent(new GameUserControl(windowContainer)); POUR LES TESTS SANS KINECT
-            windowContainer.LoadContent(new ScoreUserControl(windowContainer));
+            windowContainer.LoadContent(new GameUserControl(windowContainer));
         }
     }
 }
