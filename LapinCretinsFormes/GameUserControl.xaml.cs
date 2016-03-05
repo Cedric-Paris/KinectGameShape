@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -60,7 +61,7 @@ namespace LapinCretinsFormes
             backImg.BeginInit();
             backImg.UriSource = shape.getImageUri();
             backImg.EndInit();
-            backgroundImage.Source = backImg;
+            BackgroundImage.Source = backImg;
         }
 
         public void OnImageReady(object sender, BitmapSource sourceImage)
@@ -159,21 +160,33 @@ namespace LapinCretinsFormes
             kinectOutput.kinectSensor.ColorFrameReady -= OnPhotoReady;
             kinectOutput.RemoveSubscriptions();
 
-            ///Pour sauvegarder l'image
-            /*RenderTargetBitmap bitmap = new RenderTargetBitmap(
+            //Pour sauvegarder l'image
+            RenderTargetBitmap bitmap = new RenderTargetBitmap(
                 640,
                 480,
                 96,
                 96,
                 PixelFormats.Pbgra32);
-            bitmap.Render(img);
+            //bitmap.Render(); QUOI????????????!!!!!!!!!!!!!!!!
             BitmapFrame frame = BitmapFrame.Create(bitmap);
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(frame);
-            using (var stream = File.Create(fileName))
+            using (var stream = File.Create("./Photo.jpeg"))
             {
                 encoder.Save(stream);
-            }*/
+            }
+            using (var stream = File.Create(GetNextPhotoName()))
+            {
+                encoder.Save(stream);
+            }
+        }
+
+        private string GetNextPhotoName()
+        {
+            int i = 0;
+            while (File.Exists("./Images/Photo.jpeg" + i))
+                i++;
+            return "./Images/Photo.jpeg" + i;
         }
     }
 }

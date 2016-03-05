@@ -5,32 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="1680">
+    <UserControl.Background>
+        <ImageBrush ImageSource="./Images/Yandere.png" Stretch="UniformToFill"/>
+    </UserControl.Background>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="10*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Label Content="Instructions" Margin="0,20,0,0"/>
+        <Label Content="Instructions" Margin="0,20,0,0" Padding="10" Width="300"
+               HorizontalContentAlignment="Center">
+            <Label.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.8"/>
+            </Label.Background>
+        </Label>
         <TextBlock Grid.Row="1" Style="{StaticResource MainText}" 
-                   FontSize="32"  Text="
+                   FontSize="32" VerticalAlignment="Bottom" Padding="5" Width="800" Text="
             Cachez vous dans le temps imparti pour échapper à la folle qui vous suit ! 
-            "/>
-        <Image Grid.Row="2" Source="Images/Cerisier.png"/>
-        <TextBlock Grid.Row="3" Style="{StaticResource MainText}" 
-                   FontSize="32" >
-            <Run Text="Remplissez la forme en rose pour qu'elle ne vous repère pas dans les ombres"/>
+            ">
+            <TextBlock.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBlock Grid.Row="2" Style="{StaticResource MainText}" 
+                   FontSize="32" Padding="5" Width="800">
+            <Run Text="Remplissez la forme pour qu'elle ne vous repère pas dans les ombres"/>
             <LineBreak/>
             <Run Text="et dépassez le moins possible pour ne pas vous faire repérer !"/>
+            <TextBlock.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+            </TextBlock.Background>
         </TextBlock>
         <Button Content="Retour"
                HorizontalAlignment="Left"
                Click="ReturnButtonClick"
-               Grid.Row="3"/>
+               Grid.Row="4" VerticalAlignment="Bottom"/>
         <Button Content="Jouer !"
                HorizontalAlignment="Right"
                Click="GameButtonClick"
-               Grid.Row="3"/>
+               Grid.Row="5" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>

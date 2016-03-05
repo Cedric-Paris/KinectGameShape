@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -28,77 +29,80 @@ namespace LapinCretinsFormes
     {
         private MainWindow windowContainer;
 
-        public EmailInputUserControl(MainWindow container)
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(String info)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+
+        public string MailAdress
+        {
+            get { return _mailAdress; }
+            set
+            {
+                _mailAdress = value;
+                OnPropertyChanged("MailAdress");
+            }
+        }
+        private string _mailAdress;
+
+
+        public EmailInputUserControl(MainWindow container, BitmapSource picture)
         {
             InitializeComponent();
             windowContainer = container;
+            PictureTakenBackgroundImage.ImageSource = picture;
         }
 
         private void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            //SendEmail(new Bitmap("Images/back.jp"));            COMMENT INSTANCIER UN BITMAP ???
+            if (!EmailValidationRules.Validate(MailAdress))
+                return;
+            if (!String.IsNullOrEmpty(MailAdress))
+                //SendEmail("C:/Users/Nawhal/Documents/Debug.png", NameTextBox.Text);
+                SendEmail("./Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
         }
 
         private void ReplayButtonClick(object sender, RoutedEventArgs e)
         {
-            //SendEmail(new Bitmap("Images/back.jpg"));
+            if (!EmailValidationRules.Validate(MailAdress))
+                return;
+            if (!String.IsNullOrEmpty(MailAdress))
+                //SendEmail("C:/Users/Nawhal/Documents/Debug.png", NameTextBox.Text);
+                SendEmail("./Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new GameUserControl(windowContainer));
         }
 
-        private void SendEmail(Bitmap takenPicture) // FAIRE LES TESTS SUR L'ADRESSE MAIL
+        private void SendEmail(string filePath, string name)
         {
             try
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
                 mail.From = new MailAddress("JeuKinectIUTInfo63@gmail.com");
-                mail.To.Add("missnaloo@gmail.com");
+                mail.To.Add(MailAdress);
                 mail.Subject = "Photo prise lors des portes ouvertes de l'IUT Informatique d'Aubière (jeu Kinect)";
-                mail.Body = "Halo ! Je suis C#.";
-                
-                mail.Attachments.Add(new Attachment(BitmapToMemStream(takenPicture), TakenPictureContentType()));
+                mail.Body = "Bonjour " + name + " ! \n\n" +
+                            "Voici la photo prise lors de votre visite de l'IUT Informatique lorsque vous avez essayé notre jeu sur Kinect. Nous espérons que vous avez passé un bon moment !\n\n" +
+                            "Merci d'être venus,\n" +
+                            "Cédric Paris & Nawhal Sayarh, élèves de l'IUT Informatique de Clermont-Ferrand.";
+
+                Attachment imageAttachment = new Attachment(filePath) {Name = "Photo Jeu Kinect 05-03-2016"};
+                mail.Attachments.Add(imageAttachment);
 
                 smtpServer.Port = 587;
                 smtpServer.Credentials = new System.Net.NetworkCredential("JeuKinectIUTInfo63@gmail.com", "Chevaldo");
                 smtpServer.EnableSsl = true;
 
                 smtpServer.Send(mail);
-                MessageBox.Show("mail Send !!!!!!!!!!!");
+                MessageBox.Show("Mail envoyé :)");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                MessageBox.Show("Problème d'envoi du mail... Veuillez réessayer.\n\n" + ex.ToString());
             }
-        }
-
-        /// <summary>
-        /// Transforms the Bitmap image in a MemoryStream, making it a suitable attachment to the mail.
-        /// </summary>
-        /// <param name="TakenPicture">The Bitmap image to transform.</param>
-        /// <returns>The corresponding MemoryStream.</returns>
-        private MemoryStream BitmapToMemStream(Bitmap takenPicture)
-        {
-
-            MemoryStream memStream = new MemoryStream();
-
-            takenPicture.Save(memStream, ImageFormat.Jpeg);
-            memStream.Position = 0;
-
-            return memStream;
-        }
-
-        /// <summary>
-        /// Gives a proper name and a proper type to the taken picture.
-        /// </summary>
-        /// <returns>The ContentType of the taken picture.</returns>
-        private ContentType TakenPictureContentType()
-        {
-            ContentType contentType = new ContentType();
-            contentType.MediaType = MediaTypeNames.Image.Jpeg;
-            contentType.Name = "Photo Jeu Kinect 05-03-2016";
-
-            return contentType;
         }
     }
 }

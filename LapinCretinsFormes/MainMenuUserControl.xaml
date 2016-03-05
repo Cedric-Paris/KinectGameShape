@@ -39,7 +39,7 @@
                 Width="350" Click="CreditsButtonClick"
                 Style="{StaticResource MainMenuButton}"/>
         <Button Grid.Row="1" Grid.Column="1" Content="Highscores"
-                Width="350"
+                Width="350" Click="HighscoresButtonClick"
                 Style="{StaticResource MainMenuButton}"/>
         <Button Grid.Row="2" Grid.Column="1" Content="Quitter"
                 Width="350" Click="CloseButtonClick"

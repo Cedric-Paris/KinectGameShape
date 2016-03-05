@@ -22,18 +22,20 @@ namespace LapinCretinsFormes
     public partial class ScoreUserControl : UserControl
     {
         private MainWindow windowContainer;
+        private BitmapSource backgroundPicture;
 
         public ScoreUserControl(MainWindow container, BitmapSource picture, string score, string pourcentage)
         {
             InitializeComponent();
             windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
+            backgroundPicture = picture;
             ScoreText.Text = score;
         }
 
         public void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new EmailInputUserControl(windowContainer));
+            windowContainer.LoadContent(new EmailInputUserControl(windowContainer, backgroundPicture));
         }
     }
 }

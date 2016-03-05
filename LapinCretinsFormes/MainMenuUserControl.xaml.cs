@@ -30,6 +30,7 @@ namespace LapinCretinsFormes
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
+            CSVFileHighscoresDataSaver.SaveHighscoresToCSVFile(windowContainer.getHighscores());
             windowContainer.Close();
         }
 
@@ -41,6 +42,11 @@ namespace LapinCretinsFormes
         private void CreditsButtonClick(object sender, RoutedEventArgs e)
         {
             windowContainer.LoadContent(new CreditsUserControl(windowContainer));
+        }
+
+        private void HighscoresButtonClick(object sender, RoutedEventArgs e)
+        {
+            windowContainer.LoadContent(new HighScoresUserControl(windowContainer));
         }
     }
 }

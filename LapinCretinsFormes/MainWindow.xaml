@@ -5,6 +5,6 @@
         Title="YANDERE Escape"
         Height="480" Width="640"
         WindowState="Maximized"
-        WindowStyle="ToolWindow">
+        WindowStyle="None">
     <ContentControl Name="ContentOnWindow"/>
 </Window>

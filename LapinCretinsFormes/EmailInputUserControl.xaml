@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LapinCretinsFormes"
              mc:Ignorable="d"
              d:DesignHeight="1050" d:DesignWidth="1680">
+    <UserControl.Background>
+        <ImageBrush x:Name="PictureTakenBackgroundImage" 
+                    Stretch="UniformToFill"/>
+    </UserControl.Background>
     <UserControl.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="50"/>
@@ -13,6 +18,19 @@
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <Grid ClipToBounds="True" OverridesDefaultStyle="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <AdornedElementPlaceholder ClipToBounds="True"/>
+                <TextBlock Text="{Binding [0].ErrorContent}" Grid.Row="1"
+                           Foreground="Red" FontFamily="./Fonts/#Futura-CondensedLight" 
+                           FontStyle="Italic" FontSize="15" TextWrapping="WrapWithOverflow"
+                           ClipToBounds="True" HorizontalAlignment="Stretch"/>
+            </Grid>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -34,11 +52,20 @@
                    Style="{StaticResource MainText}"
                    FontSize="42"/>
         <TextBox Grid.Row="1" Grid.Column="1"
-                 Grid.ColumnSpan="2"/>
-        <!-- FAIRE UN INVALIDATION LISTENER AVEC MAIL
-                (SEULEMENT SI NON VIDE) !!! -->
+                 Grid.ColumnSpan="2" Name="NameTextBox" />
         <TextBox Grid.Row="2" Grid.Column="1"
-                 Grid.ColumnSpan="2"/>
+                 Grid.ColumnSpan="2" 
+                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <TextBox.Text>
+                <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                    AncestorType=UserControl}" Path="MailAdress"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:EmailValidationRules/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <WrapPanel Grid.Column="2" Grid.Row="2"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom">
