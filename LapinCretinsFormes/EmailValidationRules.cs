@@ -18,7 +18,7 @@ namespace LapinCretinsFormes
 
             if (result)
                 return new ValidationResult(true, null);
-            return new ValidationResult(false, $"\"{value as string}\" n'est pas une adresse mail valide.");
+            return new ValidationResult(false, string.Format("\"{0}\" n'est pas une adresse mail valide.", value as string));
 
         }
 

@@ -30,7 +30,6 @@ namespace LapinCretinsFormes
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            CSVFileHighscoresDataSaver.SaveHighscoresToCSVFile(windowContainer.getHighscores());
             windowContainer.Close();
         }
 

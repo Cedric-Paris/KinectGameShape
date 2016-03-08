@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace LapinCretinsFormes
 {
-    public static class CSVFileHighscoresDataSaver
+    static class CSVFileHighscoresDataSaver
     {
         public static void SaveHighscoresToCSVFile(SortedDictionary<int, string> highscores)
         {
             StringBuilder csv = new StringBuilder();
 
             foreach (KeyValuePair<int, string> hs in highscores)
-                csv.AppendLine($"{hs.Key},{hs.Value}");
-            
+                csv.AppendLine(string.Format("{0},{1}", hs.Key, hs.Value));
+
             File.WriteAllText("./highscore_save", csv.ToString());
         }
     }

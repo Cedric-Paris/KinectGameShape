@@ -33,7 +33,8 @@ namespace LapinCretinsFormes
         private void OnPropertyChanged(String info)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+            if (handler != null)
+                handler.Invoke(this, new PropertyChangedEventArgs(info));
         }
 
         public string MailAdress
@@ -60,7 +61,6 @@ namespace LapinCretinsFormes
             if (!EmailValidationRules.Validate(MailAdress))
                 return;
             if (!String.IsNullOrEmpty(MailAdress))
-                //SendEmail("C:/Users/Nawhal/Documents/Debug.png", NameTextBox.Text);
                 SendEmail("./Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
         }
@@ -70,7 +70,6 @@ namespace LapinCretinsFormes
             if (!EmailValidationRules.Validate(MailAdress))
                 return;
             if (!String.IsNullOrEmpty(MailAdress))
-                //SendEmail("C:/Users/Nawhal/Documents/Debug.png", NameTextBox.Text);
                 SendEmail("./Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new GameUserControl(windowContainer));
         }
@@ -89,7 +88,7 @@ namespace LapinCretinsFormes
                             "Merci d'être venus,\n" +
                             "Cédric Paris & Nawhal Sayarh, élèves de l'IUT Informatique de Clermont-Ferrand.";
 
-                Attachment imageAttachment = new Attachment(filePath) {Name = "Photo Jeu Kinect 05-03-2016"};
+                Attachment imageAttachment = new Attachment(filePath) { Name = "Photo Jeu Kinect 05-03-2016" };
                 mail.Attachments.Add(imageAttachment);
 
                 smtpServer.Port = 587;

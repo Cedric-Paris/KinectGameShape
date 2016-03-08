@@ -42,7 +42,7 @@ namespace LapinCretinsFormes
         public GameUserControl(MainWindow container)
         {
             InitializeComponent();
-            LoadShape(ShapeDataBase.GetRandomShape());
+            //LoadShape(ShapeDataBase.GetRandomShape());
             textTime.Text = TIME_TO_PLAY.ToString();
             currentTime = TIME_TO_PLAY;
             windowContainer = container;
@@ -61,7 +61,7 @@ namespace LapinCretinsFormes
             backImg.BeginInit();
             backImg.UriSource = shape.getImageUri();
             backImg.EndInit();
-            BackgroundImage.Source = backImg;
+            backgroundImage.Source = backImg;
         }
 
         public void OnImageReady(object sender, BitmapSource sourceImage)
@@ -74,6 +74,7 @@ namespace LapinCretinsFormes
 
         private void RefreshScore(Bitmap sourceImage)
         {
+            Debug.WriteLine("Treat Score");
             if (isTreatingPath)
                 return;
             isTreatingPath = true;
@@ -160,21 +161,32 @@ namespace LapinCretinsFormes
             kinectOutput.kinectSensor.ColorFrameReady -= OnPhotoReady;
             kinectOutput.RemoveSubscriptions();
 
-            //Pour sauvegarder l'image
-            RenderTargetBitmap bitmap = new RenderTargetBitmap(
+            ///Pour sauvegarder l'image
+            /*RenderTargetBitmap bitmap = new RenderTargetBitmap(
                 640,
                 480,
                 96,
                 96,
                 PixelFormats.Pbgra32);
-            //bitmap.Render(); QUOI????????????!!!!!!!!!!!!!!!!
+            bitmap.Render(img);
             BitmapFrame frame = BitmapFrame.Create(bitmap);
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(frame);
+            using (var stream = File.Create(fileName))
+            {
+                encoder.Save(stream);
+            }*/
+
+            //Pour sauvegarder l'image
+            BitmapFrame frame = BitmapFrame.Create(colorBitmap);
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(frame);
             using (var stream = File.Create("./Photo.jpeg"))
             {
                 encoder.Save(stream);
             }
+            encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(frame);
             using (var stream = File.Create(GetNextPhotoName()))
             {
                 encoder.Save(stream);
@@ -184,9 +196,9 @@ namespace LapinCretinsFormes
         private string GetNextPhotoName()
         {
             int i = 0;
-            while (File.Exists("./Images/Photo.jpeg" + i))
+            while (File.Exists("./Images/Photo" + i + ".jpeg"))
                 i++;
-            return "./Images/Photo.jpeg" + i;
+            return "./Images/Photo" + i + ".jpeg";
         }
     }
 }

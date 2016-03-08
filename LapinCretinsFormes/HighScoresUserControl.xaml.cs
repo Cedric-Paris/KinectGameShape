@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,24 +20,24 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class HighScoresUserControl : UserControl
     {
+
         private MainWindow windowContainer;
 
         public HighScoresUserControl(MainWindow container)
         {
-            SortedDictionary<int, string> highscores = container.getHighscores();
-            KeyValuePair<int, string> currentScore;
             InitializeComponent();
             windowContainer = container;
+            /*SortedDictionary<int, string> highscores = container.getHighscores();
+            KeyValuePair<int, string> currentScore;
+            InitializeComponent();
 
             int logicSize = highscores.Count();
             if (logicSize == 0) return;
-            for (int i=0; i<logicSize; i++)
+            for (int i = 0; i < logicSize; i++)
             {
                 currentScore = highscores.ElementAt(logicSize - i - 1);
-                Debug.WriteLine(ScoreToString(currentScore.Key, currentScore.Value));
-                Debug.WriteLine(GetTextBlockByIndex(i));
                 GetTextBlockByIndex(i).Text = ScoreToString(currentScore.Key, currentScore.Value);
-            }
+            }*/
         }
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
