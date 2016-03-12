@@ -161,44 +161,27 @@ namespace LapinCretinsFormes
             kinectOutput.kinectSensor.ColorFrameReady -= OnPhotoReady;
             kinectOutput.RemoveSubscriptions();
 
-            ///Pour sauvegarder l'image
-            /*RenderTargetBitmap bitmap = new RenderTargetBitmap(
-                640,
-                480,
-                96,
-                96,
-                PixelFormats.Pbgra32);
-            bitmap.Render(img);
-            BitmapFrame frame = BitmapFrame.Create(bitmap);
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(frame);
-            using (var stream = File.Create(fileName))
-            {
-                encoder.Save(stream);
-            }*/
-
-            //Pour sauvegarder l'image
             BitmapFrame frame = BitmapFrame.Create(colorBitmap);
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(frame);
-            using (var stream = File.Create("./Photo.jpeg"))
+            using (var stream = File.Create("./Temp/Photo.jpeg"))
             {
                 encoder.Save(stream);
+                stream.Close();
             }
             encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(frame);
-            using (var stream = File.Create(GetNextPhotoName()))
+            using (var stream = File.Create(GetPhotoName()))
             {
                 encoder.Save(stream);
+                stream.Close();
             }
         }
 
-        private string GetNextPhotoName()
+        private string GetPhotoName()
         {
-            int i = 0;
-            while (File.Exists("./Images/Photo" + i + ".jpeg"))
-                i++;
-            return "./Images/Photo" + i + ".jpeg";
+            String s = String.Format("./GamePictures/{0:dd-MM-yy H:mm_ss*}.jpeg", System.DateTime.Now);
+            return s.Replace(":", "h").Replace("_", "m").Replace("*", "s");
         }
     }
 }

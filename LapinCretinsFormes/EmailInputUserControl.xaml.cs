@@ -61,7 +61,7 @@ namespace LapinCretinsFormes
             if (!EmailValidationRules.Validate(MailAdress))
                 return;
             if (!String.IsNullOrEmpty(MailAdress))
-                SendEmail("./Photo.jpeg", NameTextBox.Text);
+                SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
         }
 
@@ -70,12 +70,15 @@ namespace LapinCretinsFormes
             if (!EmailValidationRules.Validate(MailAdress))
                 return;
             if (!String.IsNullOrEmpty(MailAdress))
-                SendEmail("./Photo.jpeg", NameTextBox.Text);
+                SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new GameUserControl(windowContainer));
         }
 
         private void SendEmail(string filePath, string name)
         {
+            name = string.IsNullOrWhiteSpace(name) ? "Anonyme" : name;
+            Window loadWindow = new LoadingWindow();
+            loadWindow.Show();
             try
             {
                 MailMessage mail = new MailMessage();
@@ -88,7 +91,7 @@ namespace LapinCretinsFormes
                             "Merci d'être venus,\n" +
                             "Cédric Paris & Nawhal Sayarh, élèves de l'IUT Informatique de Clermont-Ferrand.";
 
-                Attachment imageAttachment = new Attachment(filePath) { Name = "Photo Jeu Kinect 05-03-2016" };
+                Attachment imageAttachment = new Attachment(filePath) { Name = "Photo Jeu Kinect.jpeg" };
                 mail.Attachments.Add(imageAttachment);
 
                 smtpServer.Port = 587;
@@ -96,10 +99,13 @@ namespace LapinCretinsFormes
                 smtpServer.EnableSsl = true;
 
                 smtpServer.Send(mail);
-                MessageBox.Show("Mail envoyé :)");
+
+                loadWindow.Close();
+                imageAttachment.Dispose();
             }
             catch (Exception ex)
             {
+                loadWindow.Close();
                 MessageBox.Show("Problème d'envoi du mail... Veuillez réessayer.\n\n" + ex.ToString());
             }
         }

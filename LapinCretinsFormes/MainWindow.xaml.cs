@@ -31,7 +31,8 @@ namespace LapinCretinsFormes
         public MainWindow()
         {
             InitializeComponent();
-            LoadContent(new MainMenuUserControl(this));
+            //LoadContent(new MainMenuUserControl(this));
+            LoadContent(new EmailInputUserControl(this, null));
         }
 
         public void LoadContent(UserControl content)

@@ -1,0 +1,12 @@
+﻿<Window x:Class="LapinCretinsFormes.LoadingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Topmost="True"
+        Title="Envoi du Mail..." Height="72" Width="202">
+    <Border BorderBrush="DarkCyan" BorderThickness="5">
+        <TextBlock Grid.Column="1" Text="Envoi du Mail . . ." FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+    </Border>
+</Window>

@@ -74,6 +74,9 @@
     <Compile Include="InstructionsUserControl.xaml.cs">
       <DependentUpon>InstructionsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainMenuUserControl.xaml.cs">
       <DependentUpon>MainMenuUserControl.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InstructionsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,7 +179,6 @@
     <Resource Include="Images\Incinerateur.png" />
     <Resource Include="Images\Logo.png" />
     <Resource Include="Images\Malle.png" />
-    <Resource Include="Images\Objectif.jpg" />
     <Resource Include="Images\Poubelle.png" />
     <Resource Include="Images\Tableau.png" />
     <Resource Include="Images\Yandere.png" />
