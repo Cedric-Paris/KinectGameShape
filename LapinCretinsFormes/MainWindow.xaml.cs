@@ -23,21 +23,21 @@ namespace LapinCretinsFormes
     /// <summary>s
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IUserControlContainer
     {
 
-        private UserControl view;
+        private UserControl loadedContent;
 
         public MainWindow()
         {
             InitializeComponent();
-            //LoadContent(new MainMenuUserControl(this));
-            LoadContent(new EmailInputUserControl(this, null));
+            LoadContent(new MainMenuUserControl(this, new GameManager()));
+            //LoadContent(new EmailInputUserControl(this, null));
         }
 
         public void LoadContent(UserControl content)
         {
-            view = content;
+            this.loadedContent = content;
             ContentOnWindow.Content = content;
         }
     }

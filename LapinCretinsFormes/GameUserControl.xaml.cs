@@ -27,7 +27,9 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class GameUserControl : UserControl
     {
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+
+        private GameManager gameManager;
 
         private const int TIME_TO_PLAY = 20;
         private int currentTime = 0;
@@ -39,9 +41,10 @@ namespace LapinCretinsFormes
         private KinectOutputToImage kinectOutput;
         private bool isTreatingPath = false;
 
-        public GameUserControl(MainWindow container)
+        public GameUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
+            this.gameManager = gameManager;
             //LoadShape(ShapeDataBase.GetRandomShape());
             textTime.Text = TIME_TO_PLAY.ToString();
             currentTime = TIME_TO_PLAY;
@@ -156,32 +159,14 @@ namespace LapinCretinsFormes
             kinectOutput.kinectSensor.DepthStream.Disable();
             Application.Current.Dispatcher.Invoke(() =>
             {
-                windowContainer.LoadContent(new ScoreUserControl(windowContainer, this.colorBitmap, textScore.Text, "NON UTILISE ACTUELLEMENT"));
+                windowContainer.LoadContent(new ScoreUserControl(windowContainer, gameManager, this.colorBitmap, textScore.Text, "NON UTILISE ACTUELLEMENT"));
             });
             kinectOutput.kinectSensor.ColorFrameReady -= OnPhotoReady;
             kinectOutput.RemoveSubscriptions();
 
-            BitmapFrame frame = BitmapFrame.Create(colorBitmap);
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(frame);
-            using (var stream = File.Create("./Temp/Photo.jpeg"))
-            {
-                encoder.Save(stream);
-                stream.Close();
-            }
-            encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(frame);
-            using (var stream = File.Create(GetPhotoName()))
-            {
-                encoder.Save(stream);
-                stream.Close();
-            }
+            this.gameManager.SavePicture(colorBitmap);
+
         }
 
-        private string GetPhotoName()
-        {
-            String s = String.Format("./GamePictures/{0:dd-MM-yy H:mm_ss*}.jpeg", System.DateTime.Now);
-            return s.Replace(":", "h").Replace("_", "m").Replace("*", "s");
-        }
     }
 }

@@ -20,17 +20,19 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class CreditsUserControl : UserControl
     {
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+        private GameManager gameManager;
 
-        public CreditsUserControl(MainWindow container)
+        public CreditsUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
+            this.gameManager = gameManager;
             windowContainer = container;
         }
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
+            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
         }
     }
 }

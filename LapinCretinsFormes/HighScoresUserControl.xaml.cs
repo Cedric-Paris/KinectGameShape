@@ -21,12 +21,14 @@ namespace LapinCretinsFormes
     public partial class HighScoresUserControl : UserControl
     {
 
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+        private GameManager gameManager;
 
-        public HighScoresUserControl(MainWindow container)
+        public HighScoresUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
             windowContainer = container;
+            this.gameManager = gameManager;
             /*SortedDictionary<int, string> highscores = container.getHighscores();
             KeyValuePair<int, string> currentScore;
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace LapinCretinsFormes
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
+            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
         }
 
         private string ScoreToString(int score, string name)

@@ -20,23 +20,24 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class InstructionsUserControl : UserControl
     {
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+        private GameManager gameManager;
 
-        public InstructionsUserControl(MainWindow container)
+        public InstructionsUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
+            this.gameManager = gameManager;
             windowContainer = container;
         }
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
+            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
         }
 
         private void GameButtonClick(object sender, RoutedEventArgs e)
         {
-            //windowContainer.LoadContent(new GameUserControl(windowContainer)); POUR LES TESTS SANS KINECT
-            windowContainer.LoadContent(new GameUserControl(windowContainer));
+            windowContainer.LoadContent(new GameUserControl(windowContainer, gameManager));
         }
     }
 }

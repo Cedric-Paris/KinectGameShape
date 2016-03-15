@@ -60,20 +60,26 @@
     <Compile Include="CreditsUserControl.xaml.cs">
       <DependentUpon>CreditsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CSVFileHighscoresDataSaver.cs" />
+    <Compile Include="CSVToutPourriHighscoresAccessor.cs" />
     <Compile Include="EmailInputUserControl.xaml.cs">
       <DependentUpon>EmailInputUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="EmailValidationRules.cs" />
+    <Compile Include="FakeHighscoresAccessor.cs" />
+    <Compile Include="FakeShapeAccessor.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="GameUserControl.xaml.cs">
       <DependentUpon>GameUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HighscoresAccessor.cs" />
     <Compile Include="HighScoresUserControl.xaml.cs">
       <DependentUpon>HighScoresUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="InstructionsUserControl.xaml.cs">
       <DependentUpon>InstructionsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IShapeAccessor.cs" />
+    <Compile Include="IUserControlContainer.cs" />
     <Compile Include="LoadingWindow.xaml.cs">
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
@@ -86,6 +92,7 @@
     </Compile>
     <Compile Include="Shape.cs" />
     <Compile Include="ShapeDataBase.cs" />
+    <Compile Include="XMLHighscoresAccessor.cs" />
     <Page Include="CreditsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -21,12 +21,15 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class ScoreUserControl : UserControl
     {
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+        private GameManager gameManager;
+
         private BitmapSource backgroundPicture;
 
-        public ScoreUserControl(MainWindow container, BitmapSource picture, string score, string pourcentage)
+        public ScoreUserControl(IUserControlContainer container, GameManager gameManager, BitmapSource picture, string score, string pourcentage)
         {
             InitializeComponent();
+            this.gameManager = gameManager;
             windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
             backgroundPicture = picture;
@@ -35,7 +38,7 @@ namespace LapinCretinsFormes
 
         public void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new EmailInputUserControl(windowContainer, backgroundPicture));
+            windowContainer.LoadContent(new EmailInputUserControl(windowContainer, gameManager, backgroundPicture));
         }
     }
 }

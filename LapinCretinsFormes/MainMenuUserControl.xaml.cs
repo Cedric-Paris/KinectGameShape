@@ -20,11 +20,13 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class MainMenuUserControl : UserControl
     {
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+        private GameManager gameManager;
 
-        public MainMenuUserControl(MainWindow container)
+        public MainMenuUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
+            this.gameManager = gameManager;
             windowContainer = container;
         }
 
@@ -35,17 +37,17 @@ namespace LapinCretinsFormes
 
         private void NewGameButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new InstructionsUserControl(windowContainer));
+            windowContainer.LoadContent(new InstructionsUserControl(windowContainer, gameManager));
         }
 
         private void CreditsButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new CreditsUserControl(windowContainer));
+            windowContainer.LoadContent(new CreditsUserControl(windowContainer, gameManager));
         }
 
         private void HighscoresButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new HighScoresUserControl(windowContainer));
+            windowContainer.LoadContent(new HighScoresUserControl(windowContainer, gameManager));
         }
     }
 }

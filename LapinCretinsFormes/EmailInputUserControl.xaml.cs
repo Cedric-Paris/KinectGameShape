@@ -27,7 +27,8 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class EmailInputUserControl : UserControl
     {
-        private MainWindow windowContainer;
+        private IUserControlContainer windowContainer;
+        private GameManager gameManager;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String info)
@@ -49,9 +50,10 @@ namespace LapinCretinsFormes
         private string _mailAdress;
 
 
-        public EmailInputUserControl(MainWindow container, BitmapSource picture)
+        public EmailInputUserControl(IUserControlContainer container, GameManager gameManager, BitmapSource picture)
         {
             InitializeComponent();
+            this.gameManager = gameManager;
             windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
         }
@@ -62,7 +64,7 @@ namespace LapinCretinsFormes
                 return;
             if (!String.IsNullOrEmpty(MailAdress))
                 SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer));
+            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
         }
 
         private void ReplayButtonClick(object sender, RoutedEventArgs e)
@@ -71,7 +73,7 @@ namespace LapinCretinsFormes
                 return;
             if (!String.IsNullOrEmpty(MailAdress))
                 SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
-            windowContainer.LoadContent(new GameUserControl(windowContainer));
+            windowContainer.LoadContent(new GameUserControl(windowContainer, gameManager));
         }
 
         private void SendEmail(string filePath, string name)
