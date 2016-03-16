@@ -86,12 +86,12 @@
     <Compile Include="MainMenuUserControl.xaml.cs">
       <DependentUpon>MainMenuUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Score.cs" />
     <Compile Include="ScoreManager.cs" />
     <Compile Include="ScoreUserControl.xaml.cs">
       <DependentUpon>ScoreUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shape.cs" />
-    <Compile Include="ShapeDataBase.cs" />
     <Compile Include="XMLHighscoresAccessor.cs" />
     <Page Include="CreditsUserControl.xaml">
       <SubType>Designer</SubType>

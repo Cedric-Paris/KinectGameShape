@@ -10,27 +10,48 @@ namespace LapinCretinsFormes
 {
     public class GameManager
     {
+        public const string HIGHSCORES_FILE_PATH = "./Data/highscores";
+        public const string SHAPE_FILE_PATH = "./Data/shapes";
         public const string GALERY_DIRECTORY_PATH = "./GamePictures/";
         public const string TEMP_PICTURE_PATH = "./Temp/Photo.jpeg";
 
-        private HighscoresAccessor highScoreAccess;
-        private SortedDictionary<int, string> highScores;
+        private static Random rand = new Random();
+
+        private HighscoresAccessor highScoreAccess = new FakeHighscoresAccessor();
+        private IShapeAccessor shapeAccess = new FakeShapeAccessor();
+        private List<Score> highScores;
+        private List<Shape> shapesList;
 
         public GameManager()
         {
-            highScores = highScoreAccess.Load();
+            highScores = highScoreAccess.Load(HIGHSCORES_FILE_PATH);
+            shapesList = shapeAccess.Load(SHAPE_FILE_PATH);
         }
 
-        public SortedDictionary<int, string> GetScores()
+        public void OnApplicationClose()
+        {
+
+        }
+
+        public List<Score> GetScores()
         {
             return highScores;
         }
 
-        public void SaveScores()
+        public List<Score> GetFiveHighScores()
         {
-            highScoreAccess.Save(highScores);
+            return highScoreAccess.FiveFirstElementsOfDictionary(highScores);
         }
 
+        public void SaveScores()
+        {
+            highScoreAccess.Save(highScores, HIGHSCORES_FILE_PATH);
+        }
+
+        public Shape GetRandomShape()
+        {
+            return shapesList[rand.Next(shapesList.Count)];
+        }
 
         public void SavePicture(WriteableBitmap picture)
         {

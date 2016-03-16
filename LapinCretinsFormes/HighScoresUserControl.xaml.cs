@@ -29,17 +29,15 @@ namespace LapinCretinsFormes
             InitializeComponent();
             windowContainer = container;
             this.gameManager = gameManager;
-            /*SortedDictionary<int, string> highscores = container.getHighscores();
-            KeyValuePair<int, string> currentScore;
-            InitializeComponent();
+            List<Score> highscores = gameManager.GetFiveHighScores();
 
-            int logicSize = highscores.Count();
-            if (logicSize == 0) return;
-            for (int i = 0; i < logicSize; i++)
+            int i = 0;
+            foreach (Score s in highscores)
             {
-                currentScore = highscores.ElementAt(logicSize - i - 1);
-                GetTextBlockByIndex(i).Text = ScoreToString(currentScore.Key, currentScore.Value);
-            }*/
+                GetTextBlockByIndex(i).Text = ScoreToString(s.Value, s.Nom);
+                if (i++ == 5)
+                    break;
+            }
         }
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)

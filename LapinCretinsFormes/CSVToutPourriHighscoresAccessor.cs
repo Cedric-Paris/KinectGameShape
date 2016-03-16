@@ -9,31 +9,35 @@ namespace LapinCretinsFormes
 {
     class CSVToutPourriHighscoresAccessor : HighscoresAccessor
     {
-        public override SortedDictionary<int, string> Load(string filePath)
+        public override List<Score> Load(string filePath)
         {
+            filePath += ".csv";
+
             StreamReader reader = new StreamReader(File.OpenRead(filePath));
-            SortedDictionary<int, string> result = new SortedDictionary<int, string>();
+            List<Score> result = new List<Score>();
 
             while (!reader.EndOfStream)
             {
                 string[] values = reader.ReadLine().Split(';');
 
-                result.Add(int.Parse(values[0]), values[1]);
+                result.Add(new Score(int.Parse(values[0]), values[1]));
             }
 
             reader.Close();
 
-            return FiveFirstElementsOfDictionary(result);
+            return result;
         }
 
-        public override void Save(SortedDictionary<int, string> highscores, string filePath)
+        public override void Save(List<Score> highscores, string filePath)
         {
+            filePath += ".csv";
+
             highscores = FiveFirstElementsOfDictionary(highscores);
 
             StringBuilder csv = new StringBuilder();
 
-            foreach (KeyValuePair<int, string> hs in highscores)
-                csv.AppendLine(string.Format("{0};{1}", hs.Key, hs.Value));
+            foreach (Score s in highscores)
+                csv.AppendLine(string.Format("{0};{1}", s.Value, s.Nom));
 
             File.WriteAllText("./highscore_save", csv.ToString());
         }

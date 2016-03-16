@@ -10,16 +10,18 @@ namespace LapinCretinsFormes
 {
     public class XMLHighscoresAccessor : HighscoresAccessor
     {
-        public override SortedDictionary<int, string> Load(string filePath)
+        public override List<Score> Load(string filePath)
         {
-            SortedDictionary<int, string> result = new SortedDictionary<int, string>();
+            filePath += ".xml";
+
+            List<Score> result = new List<Score>();
             FileInfo file = new FileInfo(filePath);
 
             XDocument XMLFile = XDocument.Load(filePath);
             List<XElement> dataList = XMLFile.Descendants().ToList();
 
             foreach (XElement e in dataList)
-                result.Add(int.Parse(e.Attribute("Score").Value), e.Attribute("Nom").Value);
+                result.Add(new Score(int.Parse(e.Attribute("Score").Value), e.Attribute("Nom").Value));
 
                 //Images
                 /*string path = string.Format("{0}\\{1}", file.DirectoryName, e.Element("Images").Element("Miniature").Value);
@@ -28,13 +30,15 @@ namespace LapinCretinsFormes
                 path = string.Format("{0}\\{1}", file.DirectoryName, e.Element("Images").Element("ImagePerso").Value);
                 if (File.Exists(path))
                     newClasse.ImagePerso = new Uri(path, UriKind.Absolute);*/
-            return FiveFirstElementsOfDictionary(result);
+            return result;
         }
 
 
-        public override void Save(SortedDictionary<int, string> highscores, string filePath)
+        public override void Save(List<Score> highscores, string filePath)
         {
-            SortedDictionary<int, string> dictionaryToSave = highscores;
+            filePath += ".xml";
+
+            List<Score> listToSave = highscores;
 
             DirectoryInfo directory = new DirectoryInfo(filePath);
             DirectoryInfo directorySave = new DirectoryInfo(string.Format("{0}\\{1}-XMLSave", directory.Parent.FullName, directory.Name.Substring(0, directory.Name.Length - 4)));
@@ -56,9 +60,9 @@ namespace LapinCretinsFormes
 
             }*/
 
-            var elements = dictionaryToSave.Select(kvp => new XElement("Highcore",
-                                        new XAttribute("Score", kvp.Key),
-                                        new XAttribute("Nom", kvp.Value)));
+            var elements = listToSave.Select(score => new XElement("Highcore",
+                                        new XAttribute("Score", score.Value),
+                                        new XAttribute("Nom", score.Nom)));
 
             saveFile.Add(new XElement("Highscores", elements));
             saveFile.Save(filePath);

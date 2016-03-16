@@ -45,7 +45,7 @@ namespace LapinCretinsFormes
         {
             InitializeComponent();
             this.gameManager = gameManager;
-            //LoadShape(ShapeDataBase.GetRandomShape());
+            LoadShape(gameManager.GetRandomShape());
             textTime.Text = TIME_TO_PLAY.ToString();
             currentTime = TIME_TO_PLAY;
             windowContainer = container;

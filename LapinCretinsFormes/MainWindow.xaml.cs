@@ -26,19 +26,25 @@ namespace LapinCretinsFormes
     public partial class MainWindow : Window, IUserControlContainer
     {
 
+        private GameManager gameManager;
         private UserControl loadedContent;
 
         public MainWindow()
         {
             InitializeComponent();
-            LoadContent(new MainMenuUserControl(this, new GameManager()));
-            //LoadContent(new EmailInputUserControl(this, null));
+            gameManager = new GameManager();
+            LoadContent(new MainMenuUserControl(this, gameManager));
         }
 
         public void LoadContent(UserControl content)
         {
             this.loadedContent = content;
             ContentOnWindow.Content = content;
+        }
+
+        private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            gameManager.OnApplicationClose();
         }
     }
 }

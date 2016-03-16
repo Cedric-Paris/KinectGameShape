@@ -8,27 +8,27 @@ namespace LapinCretinsFormes
 {
     public class FakeHighscoresAccessor : HighscoresAccessor
     {
-        private static SortedDictionary<int, string> highscores;
+        private static List<Score> highscores;
 
         public FakeHighscoresAccessor()
         {
-            highscores = new SortedDictionary<int, string>();
+            highscores = new List<Score>();
 
-            highscores.Add(20000, "Geraldine");
-            highscores.Add(15000, "Jean-Michel");
-            highscores.Add(5000, "Marcel");
-            highscores.Add(25000, "Jeanne-Micheline");
-            highscores.Add(10000, "Cunégonde");
-            highscores.Add(30000, "Albertine");
-            highscores.Add(666, "Alistair");
+            highscores.Add(new Score(20000, "Geraldine"));
+            highscores.Add(new Score(15000, "Jean-Michel"));
+            highscores.Add(new Score(5000, "Marcel"));
+            highscores.Add(new Score(25000, "Jeanne-Micheline"));
+            highscores.Add(new Score(10000, "Cunégonde"));
+            highscores.Add(new Score(30000, "Albertine"));
+            highscores.Add(new Score(666, "Alistair"));
         }
 
-        public override SortedDictionary<int, string> Load(string filePath)
+        public override List<Score> Load(string filePath)
         {
-            return FiveFirstElementsOfDictionary(highscores);
+            return highscores;
         }
 
-        public override void Save(SortedDictionary<int, string> highscores, string filePath)
+        public override void Save(List<Score> highscores, string filePath)
         {
             FakeHighscoresAccessor.highscores = FiveFirstElementsOfDictionary(highscores);
         }
