@@ -11,12 +11,12 @@
             <Image Name="KinectImage" OpacityMask="White" Opacity="0.78"/>
             <Path Name="shadePath" StrokeThickness="5" Stroke="Black" Data="M 0,0 L 640,0 L 640,480 L 0,480 Z"/>
             <TextBlock>
-                <Run FontSize="25"  Text="Score : " FontFamily="Kozuka Gothic Pr6N H" Foreground="#FF322ACB"/>
-                <Run Name="textScore" FontSize="25" FontWeight="Bold" FontFamily="Hobo Std" Foreground="#FFF10000"/>
+                <Run FontSize="25"  Text="Score : " FontFamily="Kozuka Gothic Pr6N H" Foreground="WhiteSmoke"/>
+                <Run Name="textScore" FontSize="25" FontWeight="Bold" FontFamily="Hobo Std" Foreground="#FF21B8FF"/>
             </TextBlock>
             <TextBlock Canvas.Right="10">
-                <Run Name="textTime" FontSize="25" FontWeight="Bold" FontFamily="Hobo Std" Foreground="#FFF10000"/>
-                <Run FontSize="25"  Text=" s" FontFamily="Kozuka Gothic Pr6N H" Foreground="#FF322ACB"/>
+                <Run Name="textTime" FontSize="25" FontWeight="Bold" FontFamily="Hobo Std" Foreground="#FF21B8FF"/>
+                <Run FontSize="25"  Text=" s" FontFamily="Kozuka Gothic Pr6N H" Foreground="WhiteSmoke"/>
             </TextBlock>
         </Canvas>
     </Viewbox>

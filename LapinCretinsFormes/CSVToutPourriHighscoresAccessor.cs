@@ -39,7 +39,7 @@ namespace LapinCretinsFormes
             foreach (Score s in highscores)
                 csv.AppendLine(string.Format("{0};{1}", s.Value, s.Nom));
 
-            File.WriteAllText("./highscore_save", csv.ToString());
+            File.WriteAllText(filePath, csv.ToString());
         }
     }
 }

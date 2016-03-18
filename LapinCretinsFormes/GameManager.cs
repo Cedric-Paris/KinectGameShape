@@ -17,10 +17,12 @@ namespace LapinCretinsFormes
 
         private static Random rand = new Random();
 
-        private HighscoresAccessor highScoreAccess = new FakeHighscoresAccessor();
+        private HighscoresAccessor highScoreAccess = new CSVToutPourriHighscoresAccessor();
         private IShapeAccessor shapeAccess = new FakeShapeAccessor();
         private List<Score> highScores;
         private List<Shape> shapesList;
+
+        private MailSender mailSender = new MailSender();
 
         public GameManager()
         {
@@ -30,7 +32,7 @@ namespace LapinCretinsFormes
 
         public void OnApplicationClose()
         {
-
+            highScoreAccess.Save(highScores, HIGHSCORES_FILE_PATH);
         }
 
         public List<Score> GetScores()
@@ -76,6 +78,11 @@ namespace LapinCretinsFormes
         {
             String s = String.Format("{0}{1:dd-MM-yy H:mm_ss*}.jpeg", GALERY_DIRECTORY_PATH,System.DateTime.Now);
             return s.Replace(":", "h").Replace("_", "m").Replace("*", "s");
+        }
+
+        public void sendMail(string recipientMailAddress, string recipientName)
+        {
+            mailSender.SendMail(recipientMailAddress, recipientName, TEMP_PICTURE_PATH);
         }
 
     }

@@ -18,11 +18,12 @@ namespace LapinCretinsFormes
             FileInfo file = new FileInfo(filePath);
 
             XDocument XMLFile = XDocument.Load(filePath);
-            List<XElement> dataList = XMLFile.Descendants().ToList();
+            List<XElement> dataList = XMLFile.Descendants("Highcore").ToList();
 
             foreach (XElement e in dataList)
+            {
                 result.Add(new Score(int.Parse(e.Attribute("Score").Value), e.Attribute("Nom").Value));
-
+            }
                 //Images
                 /*string path = string.Format("{0}\\{1}", file.DirectoryName, e.Element("Images").Element("Miniature").Value);
                 if (File.Exists(path))
@@ -40,9 +41,9 @@ namespace LapinCretinsFormes
 
             List<Score> listToSave = highscores;
 
-            DirectoryInfo directory = new DirectoryInfo(filePath);
+            /*DirectoryInfo directory = new DirectoryInfo(filePath);
             DirectoryInfo directorySave = new DirectoryInfo(string.Format("{0}\\{1}-XMLSave", directory.Parent.FullName, directory.Name.Substring(0, directory.Name.Length - 4)));
-            Directory.CreateDirectory(string.Format("{0}\\{1}-XMLSave", directory.Parent.FullName, directory.Name.Substring(0, directory.Name.Length - 4)));
+            Directory.CreateDirectory(string.Format("{0}\\{1}-XMLSave", directory.Parent.FullName, directory.Name.Substring(0, directory.Name.Length - 4)));*/
 
             XDocument saveFile = new XDocument();
             //FileInfo fichierImage;

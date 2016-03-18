@@ -43,9 +43,18 @@
                HorizontalAlignment="Left"
                Click="ReturnButtonClick"
                Grid.Row="4" VerticalAlignment="Bottom"/>
-        <Button Content="Jouer !"
+        <StackPanel VerticalAlignment="Bottom" Grid.Row="5" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Content="Jouer !" FlowDirection="LeftToRight"
                HorizontalAlignment="Right"
                Click="GameButtonClick"
                Grid.Row="5" VerticalAlignment="Bottom"/>
+            <Button Content="Calibrer" Margin="50,0"
+               Name="CalibrateButton"
+               IsEnabled="False"
+               HorizontalAlignment="Right"
+               Click="CalibrateButtonClick"
+               Grid.Row="5" VerticalAlignment="Bottom"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

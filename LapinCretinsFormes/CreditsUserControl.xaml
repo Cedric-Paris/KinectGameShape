@@ -16,13 +16,13 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Style="{StaticResource MainText}"
+        <TextBlock Style="{StaticResource MainText}" Foreground="WhiteSmoke"
                    Margin="20,0,20,0" FontSize="50"
                    Text="Développé par Cédric Paris et Nawhal Sayarh."/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="1"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="1" Foreground="WhiteSmoke"
                    Margin="20,0,20,0" FontSize="50"
                    Text="Toute image, vidéo, musique est propriété de YandereDev, développeur du jeu Yandere Simulator dont nous avons repris l'univers."/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="2"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="2" Foreground="WhiteSmoke"
                    Margin="20,0,20,0" FontSize="50"
                    Text="Réalisé dans le cadre d'un projet de Réalité Virtuelle à l'IUT Informatique de Clermont-Ferrand, Université d'Auvergne."/>
         <Button Content="Menu" Grid.Row="3" Click="ReturnButtonClick"

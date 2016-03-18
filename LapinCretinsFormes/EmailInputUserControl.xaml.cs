@@ -83,27 +83,8 @@ namespace LapinCretinsFormes
             loadWindow.Show();
             try
             {
-                MailMessage mail = new MailMessage();
-                SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("JeuKinectIUTInfo63@gmail.com");
-                mail.To.Add(MailAdress);
-                mail.Subject = "Photo prise lors des portes ouvertes de l'IUT Informatique d'Aubière (jeu Kinect)";
-                mail.Body = "Bonjour " + name + " ! \n\n" +
-                            "Voici la photo prise lors de votre visite de l'IUT Informatique lorsque vous avez essayé notre jeu sur Kinect. Nous espérons que vous avez passé un bon moment !\n\n" +
-                            "Merci d'être venus,\n" +
-                            "Cédric Paris & Nawhal Sayarh, élèves de l'IUT Informatique de Clermont-Ferrand.";
-
-                Attachment imageAttachment = new Attachment(filePath) { Name = "Photo Jeu Kinect.jpeg" };
-                mail.Attachments.Add(imageAttachment);
-
-                smtpServer.Port = 587;
-                smtpServer.Credentials = new System.Net.NetworkCredential("JeuKinectIUTInfo63@gmail.com", "Chevaldo");
-                smtpServer.EnableSsl = true;
-
-                smtpServer.Send(mail);
-
+                gameManager.sendMail(MailAdress, name);
                 loadWindow.Close();
-                imageAttachment.Dispose();
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KinectToolkit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace LapinCretinsFormes
         public InstructionsUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
+            if (KinectOutputToImage.isCalibrate)
+                CalibrateButton.IsEnabled = true;
             this.gameManager = gameManager;
             windowContainer = container;
         }
@@ -38,6 +41,12 @@ namespace LapinCretinsFormes
         private void GameButtonClick(object sender, RoutedEventArgs e)
         {
             windowContainer.LoadContent(new GameUserControl(windowContainer, gameManager));
+        }
+
+        private void CalibrateButtonClick(object sender, RoutedEventArgs e)
+        {
+            KinectOutputToImage.isCalibrate = false;
+            CalibrateButton.IsEnabled = false;
         }
     }
 }

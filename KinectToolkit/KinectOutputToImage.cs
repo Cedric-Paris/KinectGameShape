@@ -18,6 +18,10 @@ namespace KinectToolkit
         private const int MIN_DEPTH = 2500;
         private const int CALIBRATE_LEVEL = 13;
 
+        public static bool isCalibrate;
+
+        private static List<short>[] depthPixelsReference;
+
         public delegate void ImageReadyEventHandler(object sender, BitmapSource image);
         public event ImageReadyEventHandler ImageReady;
         private void OnImageReady()
@@ -30,10 +34,6 @@ namespace KinectToolkit
         private int currentCalibrateImageNb;
 
         private bool isTreating;
-
-        private bool isCalibrate;
-
-        private List<short>[] depthPixelsReference;
 
         private DepthImagePixel[] depthPixels;
 
@@ -58,7 +58,14 @@ namespace KinectToolkit
             depthPixels = new DepthImagePixel[kinectSensor.DepthStream.FramePixelDataLength];
             colorPixels = new byte[kinectSensor.DepthStream.FramePixelDataLength * sizeof(int)];
             colorBitmap = new WriteableBitmap(kinectSensor.DepthStream.FrameWidth, kinectSensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgra32, null);//Bgr32
-            CalibrateImage();
+            if (isCalibrate)
+            {
+                kinectSensor.DepthFrameReady += this.SensorDepthFrameReady;
+            }
+            else
+            {
+                CalibrateImage();
+            }
             kinectSensor.Start();
         }
 

@@ -23,27 +23,27 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Highscores (les heureux élus)"
+        <Label Content="Highscores (les heureux élus)" Foreground="WhiteSmoke"
                Grid.ColumnSpan="2"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="1"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="1" Foreground="WhiteSmoke"
                    FontSize="50" Text="#1"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="2"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="2" Foreground="WhiteSmoke"
                    FontSize="50" Text="#2"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="3"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="3" Foreground="WhiteSmoke"
                    FontSize="50" Text="#3"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="4"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="4" Foreground="WhiteSmoke"
                    FontSize="50" Text="#4"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="5"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="5" Foreground="WhiteSmoke"
                    FontSize="50" Text="#5"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="1"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="1" Foreground="WhiteSmoke"
                    Grid.Column="1" FontSize="50" Name="OneTextBlock"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="2"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="2" Foreground="WhiteSmoke"
                    Grid.Column="1" FontSize="50" Name="TwoTextBlock"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="3"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="3" Foreground="WhiteSmoke"
                    Grid.Column="1" FontSize="50" Name="ThreeTextBlock"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="4"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="4" Foreground="WhiteSmoke"
                    Grid.Column="1" FontSize="50" Name="FourTextBlock"/>
-        <TextBlock Style="{StaticResource MainText}" Grid.Row="5"
+        <TextBlock Style="{StaticResource MainText}" Grid.Row="5" Foreground="WhiteSmoke"
                    Grid.Column="1" FontSize="50" Name="FiveTextBlock"/>
         <Button Content="Menu" Grid.Row="6" Grid.Column="1"
                 Click="ReturnButtonClick"
