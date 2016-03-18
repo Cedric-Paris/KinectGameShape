@@ -25,6 +25,7 @@ namespace LapinCretinsFormes
         private GameManager gameManager;
 
         private BitmapSource backgroundPicture;
+        private string score;
 
         public ScoreUserControl(IUserControlContainer container, GameManager gameManager, BitmapSource picture, string score, string pourcentage)
         {
@@ -33,12 +34,14 @@ namespace LapinCretinsFormes
             windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
             backgroundPicture = picture;
+            PercentageScoreText.Text = pourcentage;
+            this.score = score;
             ScoreText.Text = score;
         }
 
         public void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new EmailInputUserControl(windowContainer, gameManager, backgroundPicture));
+            windowContainer.LoadContent(new EmailInputUserControl(windowContainer, int.Parse(score), gameManager, backgroundPicture));
         }
     }
 }

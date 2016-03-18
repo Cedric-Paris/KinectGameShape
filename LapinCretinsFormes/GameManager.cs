@@ -17,7 +17,7 @@ namespace LapinCretinsFormes
 
         private static Random rand = new Random();
 
-        private HighscoresAccessor highScoreAccess = new CSVToutPourriHighscoresAccessor();
+        private HighscoresAccessor highScoreAccess = new XMLHighscoresAccessor();
         private IShapeAccessor shapeAccess = new FakeShapeAccessor();
         private List<Score> highScores;
         private List<Shape> shapesList;
@@ -38,6 +38,11 @@ namespace LapinCretinsFormes
         public List<Score> GetScores()
         {
             return highScores;
+        }
+
+        public void SaveNewScore(int score, string name)
+        {
+            highScores.Add(new Score(score, name));
         }
 
         public List<Score> GetFiveHighScores()
@@ -84,6 +89,5 @@ namespace LapinCretinsFormes
         {
             mailSender.SendMail(recipientMailAddress, recipientName, TEMP_PICTURE_PATH);
         }
-
     }
 }

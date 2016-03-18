@@ -41,6 +41,8 @@ namespace LapinCretinsFormes
         private KinectOutputToImage kinectOutput;
         private bool isTreatingPath = false;
 
+        private Geometry finalShadowsGeometry;
+
         public GameUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
@@ -96,7 +98,9 @@ namespace LapinCretinsFormes
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    textScore.Text = scoreManager.ScoreFromGeometries(shadePath.Data, Geometry.Parse(r)).ToString();
+                    finalShadowsGeometry = Geometry.Parse(r);
+                    textScore.Text = scoreManager.ScoreFromGeometries(shadePath.Data, finalShadowsGeometry).ToString();
+                    //textScore.Text = scoreManager.ScoreFromGeometries(shadePath.Data, Geometry.Parse(r)).ToString();
                 });
             }
             catch (Exception e) { }
@@ -159,7 +163,7 @@ namespace LapinCretinsFormes
             kinectOutput.kinectSensor.DepthStream.Disable();
             Application.Current.Dispatcher.Invoke(() =>
             {
-                windowContainer.LoadContent(new ScoreUserControl(windowContainer, gameManager, this.colorBitmap, textScore.Text, "NON UTILISE ACTUELLEMENT"));
+                windowContainer.LoadContent(new ScoreUserControl(windowContainer, gameManager, this.colorBitmap, textScore.Text, scoreManager.FilledPercentageFromGeometries(shadePath.Data, finalShadowsGeometry).ToString()));
             });
             kinectOutput.kinectSensor.ColorFrameReady -= OnPhotoReady;
             kinectOutput.RemoveSubscriptions();

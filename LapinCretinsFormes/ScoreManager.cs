@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,9 @@ namespace LapinCretinsFormes
         /// <returns>The players' score.</returns>
         public int ScoreFromGeometries(Geometry shapeToFill, Geometry peoplesShadows)
         {
-            double maximumScore = shapeToFill.GetArea();
-            double penalties = Geometry.Combine(shapeToFill, peoplesShadows, GeometryCombineMode.Xor, null).GetArea();
-            double score = maximumScore - penalties;
+            double fillScore = Geometry.Combine(shapeToFill, peoplesShadows, GeometryCombineMode.Intersect, null).GetArea();
+            double penalties = Geometry.Combine(peoplesShadows, shapeToFill, GeometryCombineMode.Exclude, null).GetArea();
+            double score = fillScore * 9 - (penalties / 100);
             return score > 0 ? (int)score : 0;
         }
 
@@ -37,7 +38,8 @@ namespace LapinCretinsFormes
             double maximumArea = shapeToFill.GetArea();
             double filledArea = Geometry.Combine(shapeToFill, peoplesShadows, GeometryCombineMode.Intersect, null).GetArea();
             double percentage = 100 * filledArea / maximumArea;
-            return (float) Math.Round(percentage, 2);
+            percentage = Math.Round(percentage, 2) + 10;
+            return percentage > 100 ? 100 : (float)percentage;
         }
     }
 }

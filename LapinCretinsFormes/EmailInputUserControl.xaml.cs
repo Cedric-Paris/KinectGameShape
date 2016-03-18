@@ -29,6 +29,7 @@ namespace LapinCretinsFormes
     {
         private IUserControlContainer windowContainer;
         private GameManager gameManager;
+        private int score = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String info)
@@ -50,9 +51,10 @@ namespace LapinCretinsFormes
         private string _mailAdress;
 
 
-        public EmailInputUserControl(IUserControlContainer container, GameManager gameManager, BitmapSource picture)
+        public EmailInputUserControl(IUserControlContainer container, int score, GameManager gameManager, BitmapSource picture)
         {
             InitializeComponent();
+            this.score = score;
             this.gameManager = gameManager;
             windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
@@ -62,8 +64,14 @@ namespace LapinCretinsFormes
         {
             if (!EmailValidationRules.Validate(MailAdress))
                 return;
-            if (!String.IsNullOrEmpty(MailAdress))
-                SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
+
+            string name = NameTextBox.Text;
+            name = string.IsNullOrWhiteSpace(name) ? "Anonyme" : name;
+
+            gameManager.SaveNewScore(score, name);
+
+            if (!string.IsNullOrEmpty(MailAdress))
+                SendEmail("./Temp/Photo.jpeg", name);
             windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
         }
 
@@ -71,14 +79,13 @@ namespace LapinCretinsFormes
         {
             if (!EmailValidationRules.Validate(MailAdress))
                 return;
-            if (!String.IsNullOrEmpty(MailAdress))
+            if (!string.IsNullOrEmpty(MailAdress))
                 SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
             windowContainer.LoadContent(new GameUserControl(windowContainer, gameManager));
         }
 
         private void SendEmail(string filePath, string name)
         {
-            name = string.IsNullOrWhiteSpace(name) ? "Anonyme" : name;
             Window loadWindow = new LoadingWindow();
             loadWindow.Show();
             try

@@ -23,10 +23,10 @@ namespace LapinCretinsFormes
             SmtpClient smtpServer = new SmtpClient(SMTP_CLIENT_NAME);
             mail.From = new MailAddress(SENDER_MAIL_ADDRESS);
             mail.To.Add(recipientMailAddress);
-            mail.Subject = "Photo prise lors des portes ouvertes de l'IUT Informatique d'Aubière (jeu Kinect)";
+            mail.Subject = "Jeu Kinect : Photo prise durant votre partie.";
             mail.Body = "Bonjour " + recipientName + " ! \n\n" +
-                        "Voici la photo prise lors de votre visite de l'IUT Informatique lorsque vous avez essayé notre jeu sur Kinect. Nous espérons que vous avez passé un bon moment !\n\n" +
-                        "Merci d'être venus,\n" +
+                        "Voici la photo prise lors de votre partie de notre jeu Kinect \"Yandere Escape\".\n\n" +
+                        "Merci d'avoir testé notre jeu!\n" +
                         "Cédric Paris & Nawhal Sayarh, élèves de l'IUT Informatique de Clermont-Ferrand.";
 
             Attachment imageAttachment = new Attachment(attachmentFilePath) { Name = "Photo Jeu Kinect.jpeg" };

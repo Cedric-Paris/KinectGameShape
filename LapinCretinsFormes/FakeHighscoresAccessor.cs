@@ -14,13 +14,11 @@ namespace LapinCretinsFormes
         {
             highscores = new List<Score>();
 
-            highscores.Add(new Score(20000, "Geraldine"));
-            highscores.Add(new Score(15000, "Jean-Michel"));
-            highscores.Add(new Score(5000, "Marcel"));
-            highscores.Add(new Score(25000, "Jeanne-Micheline"));
-            highscores.Add(new Score(10000, "Cunégonde"));
-            highscores.Add(new Score(30000, "Albertine"));
-            highscores.Add(new Score(666, "Alistair"));
+            highscores.Add(new Score(200, "Geraldine"));
+            highscores.Add(new Score(150, "Jean-Michel"));
+            highscores.Add(new Score(250, "Jean-Paul"));
+            highscores.Add(new Score(100, "Cunégonde"));
+            highscores.Add(new Score(300, "Albertine"));
         }
 
         public override List<Score> Load(string filePath)

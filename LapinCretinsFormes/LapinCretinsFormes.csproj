@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Banc.png" />
+    <Resource Include="Images\Bureau.png" />
     <Resource Include="Images\Canape.png" />
     <Resource Include="Images\Cerisier.png" />
     <Resource Include="Images\Fontaine.png" />
