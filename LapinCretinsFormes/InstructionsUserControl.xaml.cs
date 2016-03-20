@@ -1,18 +1,6 @@
 ﻿using KinectToolkit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
@@ -21,26 +9,27 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class InstructionsUserControl : UserControl
     {
-        private IUserControlContainer windowContainer;
-        private GameManager gameManager;
+        private IUserControlContainer _windowContainer;
+        private GameManager _gameManager;
 
         public InstructionsUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
             if (KinectOutputToImage.isCalibrate)
                 CalibrateButton.IsEnabled = true;
-            this.gameManager = gameManager;
-            windowContainer = container;
+            _gameManager = gameManager;
+            _windowContainer = container;
         }
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
+            _windowContainer.LoadContent(new MainMenuUserControl(_windowContainer, _gameManager));
         }
 
         private void GameButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new GameUserControl(windowContainer, gameManager));
+            MessageBox.Show("Veuillez libérer le champ de vision de la Kinect pendant qu'elle se calibre.", "Attention !", MessageBoxButton.OK);
+            _windowContainer.LoadContent(new GameUserControl(_windowContainer, _gameManager));
         }
 
         private void CalibrateButtonClick(object sender, RoutedEventArgs e)

@@ -1,24 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
@@ -27,12 +11,12 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class EmailInputUserControl : UserControl
     {
-        private IUserControlContainer windowContainer;
-        private GameManager gameManager;
-        private int score = 0;
+        private IUserControlContainer _windowContainer;
+        private GameManager _gameManager;
+        private int _score;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(String info)
+        private void OnPropertyChanged(string info)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
@@ -54,43 +38,61 @@ namespace LapinCretinsFormes
         public EmailInputUserControl(IUserControlContainer container, int score, GameManager gameManager, BitmapSource picture)
         {
             InitializeComponent();
-            this.score = score;
-            this.gameManager = gameManager;
-            windowContainer = container;
+            this._score = score;
+            this._gameManager = gameManager;
+            _windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
         }
 
         private void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!EmailValidationRules.Validate(MailAdress))
+            try
+            {
+                OnClose();
+            }
+            catch (InvalidOperationException)
+            {
                 return;
+            }
 
-            string name = NameTextBox.Text;
-            name = string.IsNullOrWhiteSpace(name) ? "Anonyme" : name;
-
-            gameManager.SaveNewScore(score, name);
-
-            if (!string.IsNullOrEmpty(MailAdress))
-                SendEmail("./Temp/Photo.jpeg", name);
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
+            _windowContainer.LoadContent(new MainMenuUserControl(_windowContainer, _gameManager));
         }
 
         private void ReplayButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!EmailValidationRules.Validate(MailAdress))
+            try
+            {
+                OnClose();
+            }
+            catch (InvalidOperationException)
+            {
                 return;
+            }
+
+            _windowContainer.LoadContent(new GameUserControl(_windowContainer, _gameManager));
+        }
+
+        private void OnClose()
+        {
+            if (!EmailValidationRules.Validate(MailTextBox.Text))
+                throw new InvalidOperationException("Mail not valid, cannot go on.");
+
+            string name = NameTextBox.Text;
+            name = string.IsNullOrWhiteSpace(name) ? "Anonyme" : name;
+
+            _gameManager.SaveNewScore(_score, name);
+
             if (!string.IsNullOrEmpty(MailAdress))
                 SendEmail("./Temp/Photo.jpeg", NameTextBox.Text);
-            windowContainer.LoadContent(new GameUserControl(windowContainer, gameManager));
         }
 
         private void SendEmail(string filePath, string name)
         {
-            Window loadWindow = new LoadingWindow();
+            Window loadWindow = new LoadingWindow("Envoi du Mail . . .");
             loadWindow.Show();
             try
             {
-                gameManager.sendMail(MailAdress, name);
+                _gameManager.SendMail(MailAdress, name);
                 loadWindow.Close();
             }
             catch (Exception ex)

@@ -5,8 +5,23 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Topmost="True"
-        Title="Envoi du Mail..." Height="72" Width="202">
-    <Border BorderBrush="DarkCyan" BorderThickness="5">
-        <TextBlock Grid.Column="1" Text="Envoi du Mail . . ." FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
-    </Border>
+        Background="Black"
+        Title="Chargement..." Height="200" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Chargement..." Name="WindowTitle"
+                   FontSize="25" VerticalAlignment="Center" 
+                   FontFamily="./Fonts/#Futura-CondensedMedium"
+                   Foreground="WhiteSmoke" Margin="15,0,0,0"/>
+        <Border BorderBrush="LightPink" BorderThickness="1" Grid.Row="1">
+        </Border>
+        <TextBlock Grid.Row="2" Name="ChargingReasonTextBlock"
+                   FontSize="60" VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" FontFamily="./Fonts/#Futura-CondensedMedium"
+                   Foreground="WhiteSmoke"/>
+    </Grid>
 </Window>

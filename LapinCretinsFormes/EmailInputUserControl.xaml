@@ -44,17 +44,30 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Donnez nous votre adresse mail pour qu'on vous envoie votre résultat !"
-               Grid.ColumnSpan="3" FontSize="50"/>
+               Grid.ColumnSpan="3" FontSize="50" HorizontalContentAlignment="Center"
+               Width="1150"  VerticalContentAlignment="Center">
+            <Label.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+            </Label.Background>
+        </Label>
         <TextBlock Text="Votre nom : " Grid.Row="1"
                    Style="{StaticResource MainText}"
-                   FontSize="42"/>
+                   FontSize="42" Padding="5">
+            <TextBlock.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+            </TextBlock.Background>
+        </TextBlock>
         <TextBlock Text="Votre adresse mail : " Grid.Row="2"
                    Style="{StaticResource MainText}"
-                   FontSize="42"/>
+                   FontSize="42" Padding="5">
+            <TextBlock.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
+            </TextBlock.Background>
+        </TextBlock>
         <TextBox Grid.Row="1" Grid.Column="1"
                  Grid.ColumnSpan="2" Name="NameTextBox" />
         <TextBox Grid.Row="2" Grid.Column="1"
-                 Grid.ColumnSpan="2" 
+                 Grid.ColumnSpan="2"  Name="MailTextBox"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
             <TextBox.Text>
                 <Binding RelativeSource="{RelativeSource Mode=FindAncestor,

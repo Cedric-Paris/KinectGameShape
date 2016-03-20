@@ -15,11 +15,9 @@
                 Click="NextButtonClick"/>
         <TextBlock Margin="40" Padding="10"
                    FontSize="50" Style="{StaticResource MainText}">
-            <Run Text="Bravo, vous avez rempli la forme à"/>
-            <Run Name="PercentageScoreText"/>
-            <Run Text="% pour un score de"/>
+            <Run Text="Bravo, vous avez rempli la forme avec un score de"/>
             <Run Name="ScoreText"/>
-            <Run Text=" !"/>
+            <Run Text="!"/>
             <TextBlock.Background>
                 <SolidColorBrush Color="WhiteSmoke" Opacity="0.6"/>
             </TextBlock.Background>

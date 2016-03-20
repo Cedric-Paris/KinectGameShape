@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
@@ -21,27 +9,26 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class ScoreUserControl : UserControl
     {
-        private IUserControlContainer windowContainer;
-        private GameManager gameManager;
+        private IUserControlContainer _windowContainer;
+        private GameManager _gameManager;
 
-        private BitmapSource backgroundPicture;
-        private string score;
+        private BitmapSource _backgroundPicture;
+        private string _score;
 
-        public ScoreUserControl(IUserControlContainer container, GameManager gameManager, BitmapSource picture, string score, string pourcentage)
+        public ScoreUserControl(IUserControlContainer container, GameManager gameManager, BitmapSource picture, string score)
         {
             InitializeComponent();
-            this.gameManager = gameManager;
-            windowContainer = container;
+            _gameManager = gameManager;
+            _windowContainer = container;
             PictureTakenBackgroundImage.ImageSource = picture;
-            backgroundPicture = picture;
-            PercentageScoreText.Text = pourcentage;
-            this.score = score;
+            _backgroundPicture = picture;
+            _score = score;
             ScoreText.Text = score;
         }
 
         public void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new EmailInputUserControl(windowContainer, int.Parse(score), gameManager, backgroundPicture));
+            _windowContainer.LoadContent(new EmailInputUserControl(_windowContainer, int.Parse(_score), _gameManager, _backgroundPicture));
         }
     }
 }

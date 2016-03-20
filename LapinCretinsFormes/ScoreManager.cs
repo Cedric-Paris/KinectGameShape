@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace LapinCretinsFormes
@@ -23,7 +18,7 @@ namespace LapinCretinsFormes
         {
             double fillScore = Geometry.Combine(shapeToFill, peoplesShadows, GeometryCombineMode.Intersect, null).GetArea();
             double penalties = Geometry.Combine(peoplesShadows, shapeToFill, GeometryCombineMode.Exclude, null).GetArea();
-            double score = fillScore * 9 - (penalties / 100);
+            double score = fillScore * 15 - (penalties / 50);
             return score > 0 ? (int)score : 0;
         }
 
@@ -38,7 +33,7 @@ namespace LapinCretinsFormes
             double maximumArea = shapeToFill.GetArea();
             double filledArea = Geometry.Combine(shapeToFill, peoplesShadows, GeometryCombineMode.Intersect, null).GetArea();
             double percentage = 100 * filledArea / maximumArea;
-            percentage = Math.Round(percentage, 2) + 10;
+            percentage = Math.Round(percentage*1.5, 2);
             return percentage > 100 ? 100 : (float)percentage;
         }
     }

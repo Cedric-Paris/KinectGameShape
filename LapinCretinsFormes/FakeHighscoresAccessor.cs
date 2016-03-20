@@ -1,34 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace LapinCretinsFormes
 {
     public class FakeHighscoresAccessor : HighscoresAccessor
     {
-        private static List<Score> highscores;
+        private static List<Score> _highscores;
 
         public FakeHighscoresAccessor()
         {
-            highscores = new List<Score>();
-
-            highscores.Add(new Score(200, "Geraldine"));
-            highscores.Add(new Score(150, "Jean-Michel"));
-            highscores.Add(new Score(250, "Jean-Paul"));
-            highscores.Add(new Score(100, "Cunégonde"));
-            highscores.Add(new Score(300, "Albertine"));
+            _highscores = new List<Score>
+            {
+                new Score(200, "Geraldine"),
+                new Score(150, "Jean-Michel"),
+                new Score(250, "Jean-Paul"),
+                new Score(100, "Cunégonde"),
+                new Score(300, "Albertine")
+            };
         }
 
         public override List<Score> Load(string filePath)
         {
-            return highscores;
+            return _highscores;
         }
 
         public override void Save(List<Score> highscores, string filePath)
         {
-            FakeHighscoresAccessor.highscores = FiveFirstElementsOfDictionary(highscores);
+            FakeHighscoresAccessor._highscores = FiveFirstElementsOfDictionary(highscores);
         }
     }
 }

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
@@ -20,15 +9,14 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class HighScoresUserControl : UserControl
     {
-
-        private IUserControlContainer windowContainer;
-        private GameManager gameManager;
+        private IUserControlContainer _windowContainer;
+        private GameManager _gameManager;
 
         public HighScoresUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
-            windowContainer = container;
-            this.gameManager = gameManager;
+            _windowContainer = container;
+            _gameManager = gameManager;
             List<Score> highscores = gameManager.GetFiveHighScores();
 
             int i = 0;
@@ -42,7 +30,7 @@ namespace LapinCretinsFormes
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new MainMenuUserControl(windowContainer, gameManager));
+            _windowContainer.LoadContent(new MainMenuUserControl(_windowContainer, _gameManager));
         }
 
         private string ScoreToString(int score, string name)

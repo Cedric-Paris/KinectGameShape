@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LapinCretinsFormes
+﻿namespace LapinCretinsFormes
 {
     public class Score
     {
-
         public int Value
         {
             get;
@@ -20,11 +13,10 @@ namespace LapinCretinsFormes
             private set;
         } 
         
-
         public Score(int value, string nom = "Anonyme")
         {
-            this.Value = value;
-            this.Nom = nom;
+            Value = value;
+            Nom = nom;
         }
     }
 }

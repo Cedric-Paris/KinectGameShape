@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace LapinCretinsFormes
@@ -15,49 +12,49 @@ namespace LapinCretinsFormes
         public const string GALERY_DIRECTORY_PATH = "./GamePictures/";
         public const string TEMP_PICTURE_PATH = "./Temp/Photo.jpeg";
 
-        private static Random rand = new Random();
+        private static Random _rand = new Random();
 
-        private HighscoresAccessor highScoreAccess = new XMLHighscoresAccessor();
-        private IShapeAccessor shapeAccess = new FakeShapeAccessor();
-        private List<Score> highScores;
-        private List<Shape> shapesList;
+        private HighscoresAccessor _highScoreAccess = new XMLHighscoresAccessor();
+        private IShapeAccessor _shapeAccess = new FakeShapeAccessor();
+        private List<Score> _highScores;
+        private List<Shape> _shapesList;
 
-        private MailSender mailSender = new MailSender();
+        private MailSender _mailSender = new MailSender();
 
         public GameManager()
         {
-            highScores = highScoreAccess.Load(HIGHSCORES_FILE_PATH);
-            shapesList = shapeAccess.Load(SHAPE_FILE_PATH);
+            _highScores = _highScoreAccess.Load(HIGHSCORES_FILE_PATH);
+            _shapesList = _shapeAccess.Load(SHAPE_FILE_PATH);
         }
 
         public void OnApplicationClose()
         {
-            highScoreAccess.Save(highScores, HIGHSCORES_FILE_PATH);
+            SaveScores();
         }
 
         public List<Score> GetScores()
         {
-            return highScores;
+            return _highScores;
         }
 
         public void SaveNewScore(int score, string name)
         {
-            highScores.Add(new Score(score, name));
+            _highScores.Add(new Score(score, name));
         }
 
         public List<Score> GetFiveHighScores()
         {
-            return highScoreAccess.FiveFirstElementsOfDictionary(highScores);
+            return _highScoreAccess.FiveFirstElementsOfDictionary(_highScores);
         }
 
         public void SaveScores()
         {
-            highScoreAccess.Save(highScores, HIGHSCORES_FILE_PATH);
+            _highScoreAccess.Save(_highScores, HIGHSCORES_FILE_PATH);
         }
 
         public Shape GetRandomShape()
         {
-            return shapesList[rand.Next(shapesList.Count)];
+            return _shapesList[_rand.Next(_shapesList.Count)];
         }
 
         public void SavePicture(WriteableBitmap picture)
@@ -81,13 +78,13 @@ namespace LapinCretinsFormes
 
         private string GetPhotoPath()
         {
-            String s = String.Format("{0}{1:dd-MM-yy H:mm_ss*}.jpeg", GALERY_DIRECTORY_PATH,System.DateTime.Now);
+            string s = string.Format("{0}{1:dd-MM-yy H:mm_ss*}.jpeg", GALERY_DIRECTORY_PATH,System.DateTime.Now);
             return s.Replace(":", "h").Replace("_", "m").Replace("*", "s");
         }
 
-        public void sendMail(string recipientMailAddress, string recipientName)
+        public void SendMail(string recipientMailAddress, string recipientName)
         {
-            mailSender.SendMail(recipientMailAddress, recipientName, TEMP_PICTURE_PATH);
+            _mailSender.SendMail(recipientMailAddress, recipientName, TEMP_PICTURE_PATH);
         }
     }
 }

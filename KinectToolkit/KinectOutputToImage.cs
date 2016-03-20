@@ -1,11 +1,6 @@
 ﻿using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -53,6 +48,10 @@ namespace KinectToolkit
                     kinectSensor = potentialSensor;
                     break;
                 }
+            }
+            if (kinectSensor == null)
+            {
+                throw new NullReferenceException("There is no kinect.");
             }
             kinectSensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
             depthPixels = new DepthImagePixel[kinectSensor.DepthStream.FramePixelDataLength];

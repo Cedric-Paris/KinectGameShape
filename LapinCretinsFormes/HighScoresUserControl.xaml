@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="1680">
     <UserControl.Background>
-        <ImageBrush x:Name="PictureTakenBackgroundImage" 
+        <ImageBrush ImageSource="Images/Lycee.png" Opacity="0.5"
                     Stretch="UniformToFill"/>
     </UserControl.Background>
     <Grid Margin="20">

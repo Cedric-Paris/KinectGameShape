@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LapinCretinsFormes
 {
@@ -20,34 +8,34 @@ namespace LapinCretinsFormes
     /// </summary>
     public partial class MainMenuUserControl : UserControl
     {
-        private IUserControlContainer windowContainer;
-        private GameManager gameManager;
+        private IUserControlContainer _windowContainer;
+        private GameManager _gameManager;
 
         public MainMenuUserControl(IUserControlContainer container, GameManager gameManager)
         {
             InitializeComponent();
-            this.gameManager = gameManager;
-            windowContainer = container;
+            _gameManager = gameManager;
+            _windowContainer = container;
         }
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.Close();
+            _windowContainer.Close();
         }
 
         private void NewGameButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new InstructionsUserControl(windowContainer, gameManager));
+            _windowContainer.LoadContent(new InstructionsUserControl(_windowContainer, _gameManager));
         }
 
         private void CreditsButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new CreditsUserControl(windowContainer, gameManager));
+            _windowContainer.LoadContent(new CreditsUserControl(_windowContainer, _gameManager));
         }
 
         private void HighscoresButtonClick(object sender, RoutedEventArgs e)
         {
-            windowContainer.LoadContent(new HighScoresUserControl(windowContainer, gameManager));
+            _windowContainer.LoadContent(new HighScoresUserControl(_windowContainer, _gameManager));
         }
     }
 }

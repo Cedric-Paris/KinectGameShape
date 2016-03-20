@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace LapinCretinsFormes
 {
     class EmailValidationRules : ValidationRule
     {
-        public EmailValidationRules() { }
-
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
             bool result = Validate(value);
